@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="56" viewBox="0 0 180 56">
+  <!-- PLACEHOLDER — replace with the official MISJ logo file (see README.md). -->
+  <rect x="1" y="1" width="178" height="54" rx="4" fill="#071a5c" stroke="#ffd21f" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="16" y="25" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#ffffff" letter-spacing="1.5">MISJ LOGO</text>
+  <text x="16" y="42" font-family="Courier New, monospace" font-size="9" fill="#ffd21f" letter-spacing="1.2">PLACEHOLDER · REPLACE</text>
+</svg>
