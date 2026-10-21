@@ -57,10 +57,10 @@ window.STUCO_CONTENT = {
   /* ---------- 4. LEADERSHIP (CHAPTER 03) ----------
      mark = the big letters shown when there is no photo yet. */
   leadership: [
-    { name: "President Name",      role: "President",      department: "Executive Board", mark: "P",  photo: "", quote: "Short editable quote." },
-    { name: "Vice President Name", role: "Vice President", department: "Executive Board", mark: "VP", photo: "", quote: "Short editable quote." },
-    { name: "Secretary Name",      role: "Secretary",      department: "Executive Board", mark: "S",  photo: "", quote: "Short editable quote." },
-    { name: "Treasurer Name",      role: "Treasurer",      department: "Finance and Treasury", mark: "T", photo: "", quote: "Short editable quote." }
+    { name: "President Name",      role: "President",      department: "Executive Board", group: "President & Vice President", mark: "P",  photo: "", quote: "Short editable quote." },
+    { name: "Vice President Name", role: "Vice President", department: "Executive Board", group: "President & Vice President", mark: "VP", photo: "", quote: "Short editable quote." },
+    { name: "Secretary Name",      role: "Secretary",      department: "Executive Board", group: "Secretaries", mark: "S",  photo: "", quote: "Short editable quote." },
+    { name: "Treasurer Name",      role: "Treasurer",      department: "Finance and Treasury", group: "Secretaries", mark: "T", photo: "", quote: "Short editable quote." }
   ],
 
   // General members not listed inside a department (department members are added automatically)
