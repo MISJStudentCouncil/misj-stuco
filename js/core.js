@@ -193,7 +193,7 @@
 
   /* ---------- cursor (desktop only) ---------- */
   SC.initCursor = function () {
-    if (!SC.fine) return;
+    return; // custom cursor disabled: the normal system cursor is used
     html.classList.add('has-cursor');
     const c = $('.cursor'), ring = $('.cursor__ring'), dot = $('.cursor__dot'), label = $('.cursor__label');
     let x = -100, y = -100, rx = x, ry = y, shown = false;

@@ -28,7 +28,7 @@ window.STUCO_CONTENT = {
     term: "2026 — 2027",
     // OFFICIAL MISJ LOGO — replace the placeholder file path with the real logo,
     // e.g. "assets/misj-logo.png". The site never recolours or crops it.
-    logo: { src: "assets/logo-placeholder.svg", alt: "Mentari Intercultural School Jakarta logo" },
+    logo: { src: "assets/misj-logo.webp", alt: "Mentari Intercultural School Jakarta logo" },
     // Optional StuCo logo shown in the footer (leave "" to hide)
     stucoLogo: { src: "", alt: "MISJ Student Council logo" }
   },

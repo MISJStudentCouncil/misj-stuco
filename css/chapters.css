@@ -24,16 +24,16 @@
 .hero__title {
   font-weight: 900; font-stretch: 125%; text-transform: uppercase;
   letter-spacing: -.055em; line-height: .8; margin-right: -.055em; white-space: nowrap;
-  font-size: min(20vw, 46vh);
+  font-size: min(7.8vw, 30vh);
 }
 .hero__title .ch {
-  display: inline-block; opacity: 0; filter: blur(16px);
+  display: inline-block; white-space: pre; opacity: 0; filter: blur(16px);
   transform: translate3d(0, .32em, 0) scale(1.05);
   transition: opacity 1.4s var(--ease), transform 1.7s var(--ease), filter 1.4s var(--ease);
   transition-delay: calc(.3s + var(--i) * .09s);
 }
 .loaded .hero__title .ch { opacity: 1; filter: none; transform: none; }
-.hero__school { margin-top: clamp(18px, 3.4vh, 38px); letter-spacing: .44em; color: var(--mist); opacity: 0; transition: opacity 1.4s 1.15s; will-change: transform; }
+.hero__school { margin-top: clamp(18px, 3.4vh, 38px); font-family: var(--f-display); font-weight: 600; font-stretch: 112%; font-size: clamp(.8rem, 1.2vw, 1.1rem); letter-spacing: .3em; color: var(--mist); opacity: 0; transition: opacity 1.4s 1.15s; will-change: transform; }
 .loaded .hero__school { opacity: 1; }
 .hero__start {
   margin-top: clamp(40px, 8vh, 90px);
@@ -255,3 +255,12 @@
 .reduce .marq__track { animation: none; flex-wrap: wrap; white-space: normal; }
 .reduce .marq { white-space: normal; }
 .reduce .comm__bg i:nth-child(4) { animation: none; }
+
+/* logo, top centre of the hero */
+.hero__logo {
+  position: absolute; top: clamp(24px, 5vh, 56px); left: 50%; z-index: 2;
+  height: clamp(72px, 12vh, 130px); width: auto; transform: translateX(-50%);
+  opacity: 0; transition: opacity 1.4s var(--ease) .6s; pointer-events: none;
+}
+.loaded .hero__logo { opacity: 1; }
+.arrived .hero__logo { transition: none; }

@@ -111,18 +111,18 @@
         <p class="dv-keys micro" data-reveal style="--d:.12s">${keysHTML(d)}</p>
       </header>` +
       SC.media(d.image, { cls: 'dv-image', alt: d.name, label: 'Department photo · replace', mark: (d.short || d.name).split(' ')[0], attrs: 'data-cursor="view" data-reveal' }) +
-      `<section class="dv-block dv-block--first"><p class="dv-label micro">01 / Our mission</p><p class="dv-mission" data-reveal>${esc(d.mission)}</p></section>
-      <section class="dv-block"><p class="dv-label micro">02 / What we do</p><ol class="dv-do">${(d.whatWeDo || []).map((w, k) => `<li data-reveal style="--d:${(k * 0.07).toFixed(2)}s"><span class="micro">${pad(k + 1)}</span>${esc(w)}</li>`).join('')}</ol></section>
-      <section class="dv-block"><p class="dv-label micro">03 / Our people</p><div class="dv-people">
+      `<section class="dv-block dv-block--first"><p class="dv-label micro">Our mission</p><p class="dv-mission" data-reveal>${esc(d.mission)}</p></section>
+      <section class="dv-block"><p class="dv-label micro">What we do</p><ol class="dv-do">${(d.whatWeDo || []).map((w, k) => `<li data-reveal style="--d:${(k * 0.07).toFixed(2)}s"><span class="micro">${pad(k + 1)}</span>${esc(w)}</li>`).join('')}</ol></section>
+      <section class="dv-block"><p class="dv-label micro">Our people</p><div class="dv-people">
         <figure class="dv-head" data-reveal>${SC.media(d.head.photo, { portrait: true, mark: pad(i + 1), alt: `Portrait of ${d.head.name}, head of ${d.name}`, label: 'Portrait · replace', attrs: 'data-cursor="view"' })}
           <figcaption class="dv-head__cap"><span class="micro">Head of department</span><strong>${esc(d.head.name)}</strong>${d.head.quote ? `<q>${esc(d.head.quote)}</q>` : ''}</figcaption></figure>
         <div data-reveal style="--d:.1s"><p class="micro dv-members-label">Members</p><ul class="dv-members">${(d.members || []).map((m) => `<li>${esc(m)}</li>`).join('')}</ul></div>
       </div></section>
-      <section class="dv-block"><p class="dv-label micro">04 / Our projects</p>${projects.length
+      <section class="dv-block"><p class="dv-label micro">Our projects</p>${projects.length
         ? `<ul class="dv-projects">${projects.map(({ p, idx }) => `<li data-reveal><button class="dv-proj" type="button" data-project="${idx}" data-cursor="open"><span class="dv-proj__title">${esc(p.title)}</span><span class="micro">${esc(p.status)}</span><span class="micro">${esc(p.year)}</span></button></li>`).join('')}</ul>`
         : '<p class="dv-empty">No projects listed yet — the first one could be yours.</p>'}</section>
-      <section class="dv-block"><p class="dv-label micro">05 / Our impact</p><div class="dv-stats">${(d.stats || []).map((s) => `<div data-reveal><p class="dv-stat__num" aria-label="${esc(s.value)}${esc(s.suffix || '')}"><b data-count="${esc(s.value)}" aria-hidden="true" style="font-weight:inherit">0</b><span aria-hidden="true">${esc(s.suffix || '')}</span></p><p class="dv-stat__label micro">${esc(s.label)}</p></div>`).join('')}</div></section>
-      <section class="dv-block dv-block--full"><p class="dv-label micro">06 / Gallery</p><div class="dv-gallery">${gallery.map((g, k) => SC.media(g, { alt: `${d.name} — gallery photo ${k + 1}`, label: 'Gallery · replace', attrs: 'data-cursor="view"' })).join('')}</div></section>
+      <section class="dv-block"><p class="dv-label micro">Our impact</p><div class="dv-stats">${(d.stats || []).map((s) => `<div data-reveal><p class="dv-stat__num" aria-label="${esc(s.value)}${esc(s.suffix || '')}"><b data-count="${esc(s.value)}" aria-hidden="true" style="font-weight:inherit">0</b><span aria-hidden="true">${esc(s.suffix || '')}</span></p><p class="dv-stat__label micro">${esc(s.label)}</p></div>`).join('')}</div></section>
+      <section class="dv-block dv-block--full"><p class="dv-label micro">Gallery</p><div class="dv-gallery">${gallery.map((g, k) => SC.media(g, { alt: `${d.name} — gallery photo ${k + 1}`, label: 'Gallery · replace', attrs: 'data-cursor="view"' })).join('')}</div></section>
       <nav class="dv-nav" aria-label="Department navigation">
         <button type="button" data-go="${(i - 1 + n) % n}" data-cursor="button"><span class="dv-nav__dir micro">← Previous department</span><span class="dv-nav__name">${esc(prev.name)}</span></button>
         <button type="button" data-go="${(i + 1) % n}" data-cursor="button"><span class="dv-nav__dir micro">Next department →</span><span class="dv-nav__name">${esc(next.name)}</span></button>

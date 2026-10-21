@@ -219,7 +219,7 @@ html.lenis, html.lenis body { height: auto; }
 .nav__logo { display: block; }
 .nav__logo img { height: clamp(38px, 3.3vw, 54px); width: auto; max-width: 220px; object-fit: contain; }
 .nav__right { display: flex; align-items: center; gap: clamp(14px, 2vw, 30px); }
-.nav__progress { display: flex; align-items: baseline; gap: .45em; color: var(--mist); }
+.nav__progress { display: none; }
 .nav__num { color: var(--yellow); min-width: 2ch; }
 .nav__title { margin-left: .9em; padding-left: .9em; border-left: 1px solid var(--faint); color: var(--white); opacity: .85; }
 .nav__menu {
