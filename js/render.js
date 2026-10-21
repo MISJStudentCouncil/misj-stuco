@@ -1,11 +1,4 @@
-const groups = [];
-    (C.leadership || []).forEach((p) => {
-      const name = p.group || '';
-      let g = groups.find((x) => x.name === name);
-      if (!g) groups.push(g = { name, people: [] });
-      g.people.push(p);
-    });
-    const leaders = [].concat(...groups.map((g) => g.people));   // same order as on screen/* ==========================================================================
+/* ==========================================================================
    MISJ STUCO — RENDER
    Builds every chapter from content/content.js. No content lives in here.
    ========================================================================== */
@@ -114,50 +107,19 @@ const groups = [];
 
   /* ---------- 03 people ---------- */
   function renderPeople(C, D) {
-    const groups = [];
-    (C.leadership || []).forEach((p) => {
-      const name = p.group || '';
-      let g = groups.find((x) => x.name === name);
-      if (!g) groups.push(g = { name, people: [] });
-      g.people.push(p);
-    });
-    const leaders = [].concat(...groups.map((g) => g.people));   // same order as on screen
-    const heads = D.map((d, i) => ({ name: d.head.name, role: 'Head of department', department: d.name, short: d.short, photo: d.head.photo, quote: d.head.quote, num: pad(i + 1) }));
-    const members = [];
-    (C.members || []).forEach((m) => members.push({ name: m, tag: 'StuCo' }));
-    D.forEach((d) => (d.members || []).forEach((m) => members.push({ name: m, tag: d.short })));
+    const groups = C.leadership || [];
+    const heads = D.map((d, i) => ({ name: d.head.name, role: 'Head of department', department: d.name, short: d.short, photo: d.image, quote: d.head.quote, num: pad(i + 1) }));
 
-    const spotHTML = (p) => p
-      ? `<div class="spot"><p class="spot__role micro">${esc(p.role)}</p><p class="spot__name">${esc(p.name)}</p><p class="spot__dept micro">${esc(p.department)}</p>${p.quote ? `<blockquote class="spot__quote">“${esc(p.quote)}”</blockquote>` : ''}</div>`
-      : `<div class="spot"><p class="spot__role micro">${leaders.length} leaders · ${heads.length} heads · ${members.length}+ members</p><p class="spot__name">The people behind StuCo.</p><p class="spot__hint micro">${SC.fine ? 'Hover' : 'Tap'} a portrait to meet them</p></div>`;
-
-    const stage = $('.crew__stage'), spot = $('.crew__spot');
-    const personHTML = (p) =>
-      `<li class="person"><button class="person__btn" type="button" data-cursor="view" aria-label="${esc(p.name)}, ${esc(p.role)}">${SC.media(p.photo, { tag: 'span', cls: 'person__frame', portrait: true, mark: p.mark || SC.initials(p.name), alt: `Portrait of ${p.name}, ${p.role}`, label: 'Portrait · replace' })}</button><div class="person__cap" aria-hidden="true"><span class="micro">${esc(p.role)}</span><strong>${esc(p.name)}</strong></div></li>`;
+    const stage = $('.crew__stage');
     stage.innerHTML = groups.map((g) =>
-      `<div class="crew__group">${g.name ? `<p class="label label--sub">${esc(g.name)}</p>` : ''}<ul class="crew__row" style="--n:${g.people.length}">${g.people.map(personHTML).join('')}</ul></div>`).join('');
-    spot.innerHTML = spotHTML(null);
-    hoverGroup(stage, '.person', (i) => { spot.innerHTML = spotHTML(i < 0 ? null : leaders[i]); });
+      `<div class="crew__group">${g.group ? `<p class="label label--sub">${esc(g.group)}</p>` : ''}${SC.media(g.photo, { cls: 'crew__photo', mark: g.people.map((p) => p.name[0]).join(''), alt: `${g.group} group photo`, label: 'Group photo · replace' })}<ul class="crew__names">${g.people.map((p) => `<li><span class="micro">${esc(p.role)}</span><strong>${esc(p.name)}</strong></li>`).join('')}</ul></div>`).join('');
 
-    const strip = $('.heads__strip'), cap = $('.heads__caption');
+    const strip = $('.heads__strip');
     strip.style.setProperty('--n', Math.max(1, heads.length));
     strip.innerHTML = heads.map((p) =>
-      `<li class="head"><button class="head__btn" type="button" data-cursor="view" aria-label="${esc(p.name)}, head of ${esc(p.department)}">${SC.media(p.photo, { tag: 'span', portrait: true, mark: p.num, alt: `Portrait of ${p.name}, head of ${p.department}`, label: false })}<span class="head__num micro" aria-hidden="true">${p.num}</span></button><div class="head__cap"><span class="micro">${esc(p.short)}</span><strong>${esc(p.name)}</strong></div></li>`).join('');
-    const capHTML = (p) => p
-      ? `<span class="micro">${p.num} / ${esc(p.department)}</span><strong>${esc(p.name)}</strong>${p.quote ? `<em>“${esc(p.quote)}”</em>` : ''}`
-      : `<span class="micro">${heads.length} departments</span><strong>One head for every team.</strong>`;
-    cap.innerHTML = capHTML(null);
-    hoverGroup(strip, '.head', (i) => { cap.innerHTML = capHTML(i < 0 ? null : heads[i]); });
+      `<li class="head"><span class="head__tag micro" aria-hidden="true">${esc(p.short)}</span><button class="head__btn" type="button" data-cursor="view" aria-label="${esc(p.department)} team">${SC.media(p.photo, { tag: 'span', mark: p.num, alt: `${p.department} team photo`, label: false })}<span class="head__num micro" aria-hidden="true">${p.num}</span></button><div class="head__cap"><strong>${esc(p.department)}</strong></div></li>`).join('');
+    hoverGroup(strip, '.head', () => {});
 
-    /* members marquee: two rows moving in opposite directions */
-    const wrap = $('.members__marquee');
-    if (!members.length) { $('.members').hidden = true; return; }
-    const rows = [members.filter((_, i) => i % 2 === 0), members.filter((_, i) => i % 2 === 1)].filter((r) => r.length);
-    const item = (m) => `<span class="marq__item">${esc(m.name)} <small>${esc(m.tag)}</small></span>`;
-    wrap.innerHTML = rows.map((r) => {
-      const seq = r.map(item).join('');
-      return `<div class="marq" aria-hidden="true" style="--dur:${Math.max(30, r.length * 7)}s"><div class="marq__track">${seq}${seq}</div></div>`;
-    }).join('') + `<ul class="sr-only">${members.map((m) => `<li>${esc(m.name)}, ${esc(m.tag)}</li>`).join('')}</ul>`;
   }
 
   /* hover / focus / tap highlighting for a group of portraits */

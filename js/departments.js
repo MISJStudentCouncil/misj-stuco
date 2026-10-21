@@ -115,7 +115,7 @@
       <section class="dv-block"><p class="dv-label micro">What we do</p><ol class="dv-do">${(d.whatWeDo || []).map((w, k) => `<li data-reveal style="--d:${(k * 0.07).toFixed(2)}s"><span class="micro">${pad(k + 1)}</span>${esc(w)}</li>`).join('')}</ol></section>
       <section class="dv-block"><p class="dv-label micro">Our people</p><div class="dv-people">
         <figure class="dv-head" data-reveal>${SC.media(d.head.photo, { portrait: true, mark: pad(i + 1), alt: `Portrait of ${d.head.name}, head of ${d.name}`, label: 'Portrait · replace', attrs: 'data-cursor="view"' })}
-          <figcaption class="dv-head__cap"><span class="micro">Head of department</span><strong>${esc(d.head.name)}</strong>${d.head.quote ? `<q>${esc(d.head.quote)}</q>` : ''}</figcaption></figure>
+          <figcaption class="dv-head__cap"><span class="micro">Head of department</span><strong>${esc(d.head.name)}</strong></figcaption></figure>
         <div data-reveal style="--d:.1s"><p class="micro dv-members-label">Members</p><ul class="dv-members">${(d.members || []).map((m) => `<li>${esc(m)}</li>`).join('')}</ul></div>
       </div></section>
       <section class="dv-block"><p class="dv-label micro">Our projects</p>${projects.length

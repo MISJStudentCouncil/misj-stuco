@@ -54,13 +54,20 @@ window.STUCO_CONTENT = {
     { word: "ACTION",     line: "Ideas only matter when we do something with them." }
   ],
 
-  /* ---------- 4. LEADERSHIP (CHAPTER 03) ----------
-     mark = the big letters shown when there is no photo yet. */
+  /* ---------- 4. LEADERSHIP (CHAPTER 03) ---------- */
+  /* One photo per group (landscape works best). photo: "" shows a placeholder. */
   leadership: [
-    { name: "President Name",      role: "President",      department: "Executive Board", group: "President & Vice President", mark: "P",  photo: "", quote: "Short editable quote." },
-    { name: "Vice President Name", role: "Vice President", department: "Executive Board", group: "President & Vice President", mark: "VP", photo: "", quote: "Short editable quote." },
-    { name: "Secretary Name",      role: "Secretary",      department: "Executive Board", group: "Secretaries", mark: "S",  photo: "", quote: "Short editable quote." },
-    { name: "Treasurer Name",      role: "Treasurer",      department: "Finance and Treasury", group: "Secretaries", mark: "T", photo: "", quote: "Short editable quote." }
+    { group: "President & Vice President", photo: "assets/images/president-vp.jpg", people: [
+      { name: "Ardha", role: "President" },
+      { name: "Kimi", role: "Vice President" }
+    ] },
+    { group: "Secretaries", photo: "assets/images/secretaries.jpg", people: [
+      { name: "Azalea", role: "Secretary" },
+      { name: "Faris", role: "Secretary" },
+      { name: "Mikal", role: "Secretary" },
+      { name: "Melvin", role: "Secretary" },
+      { name: "Alex", role: "Secretary" }
+    ] }
   ],
 
   // General members not listed inside a department (department members are added automatically)
@@ -68,7 +75,7 @@ window.STUCO_CONTENT = {
 
   /* ---------- 5. DEPARTMENTS (CHAPTER 04) ----------
      id      : short unique word, also picks the visual motif
-               (events, sports, creative, media, pr, welfare, academics,
+               (events, sports, creative, pr, welfare, academics,
                 finance, fundraising, environment, responsibility, technology).
                A new department with a new id gets a default motif.
      short   : label used on the network map.                               */
@@ -83,7 +90,7 @@ window.STUCO_CONTENT = {
       head: { name: "Department Head", photo: "", quote: "Short editable quote." },
       members: ["Member Name", "Member Name", "Member Name"],
       stats: [{ value: 12, suffix: "+", label: "Events run" }, { value: 600, suffix: "+", label: "Attendees" }],   // SAMPLE
-      image: "", gallery: ["", "", ""]
+      image: "assets/images/events-programs.jpg", gallery: ["", "", ""]
     },
     {
       id: "sports", name: "Sports and Competition", short: "Sports & Competition",
@@ -95,31 +102,19 @@ window.STUCO_CONTENT = {
       head: { name: "Department Head", photo: "", quote: "Short editable quote." },
       members: ["Member Name", "Member Name", "Member Name"],
       stats: [{ value: 6, suffix: "", label: "Tournaments" }, { value: 300, suffix: "+", label: "Athletes" }],
-      image: "", gallery: ["", "", ""]
+      image: "assets/images/sports-competition.jpg", gallery: ["", "", ""]
     },
     {
-      id: "creative", name: "Creative", short: "Creative",
-      tagline: "We give ideas a shape.",
-      description: "Responsible for creative concepts, visual ideas, design, campaigns, and the artistic identity of StuCo.",
-      keywords: ["Imagine", "Create", "Inspire"],
-      mission: "To give every StuCo idea a look, a feeling and a story that students remember.",
-      whatWeDo: ["Design posters, campaigns and merchandise", "Shape the visual identity of StuCo", "Art-direct events and decorations", "Support other departments with creative concepts"],
+      id: "creative", name: "Creative, Media, and Documentation", short: "Creative & Media",
+      tagline: "We give ideas a shape — and keep the moments.",
+      description: "Responsible for creative concepts, design, campaigns, photography, videography, content creation, documentation, and preserving StuCo memories.",
+      keywords: ["Create", "Capture", "Remember"],
+      mission: "To give every StuCo idea a look and a story, and to capture the journey honestly and beautifully so every generation can look back and build forward.",
+      whatWeDo: ["Design posters, campaigns and merchandise", "Shape the visual identity of StuCo", "Photograph and film every StuCo moment", "Produce recap videos, social content and the StuCo archive"],
       head: { name: "Department Head", photo: "", quote: "Short editable quote." },
       members: ["Member Name", "Member Name", "Member Name"],
-      stats: [{ value: 40, suffix: "+", label: "Designs made" }, { value: 5, suffix: "", label: "Campaigns" }],
-      image: "", gallery: ["", "", ""]
-    },
-    {
-      id: "media", name: "Media and Documentation", short: "Media & Documentation",
-      tagline: "We keep the moments.",
-      description: "Responsible for photography, videography, content creation, documentation, and preserving StuCo memories.",
-      keywords: ["Capture", "Create", "Remember"],
-      mission: "To capture the journey honestly and beautifully, so every generation can look back and build forward.",
-      whatWeDo: ["Photograph and film every StuCo moment", "Produce recap videos and social content", "Build the StuCo photo archive", "Tell students' stories"],
-      head: { name: "Department Head", photo: "", quote: "Short editable quote." },
-      members: ["Member Name", "Member Name", "Member Name"],
-      stats: [{ value: 2000, suffix: "+", label: "Photos taken" }, { value: 15, suffix: "", label: "Videos" }],
-      image: "", gallery: ["", "", ""]
+      stats: [{ value: 40, suffix: "+", label: "Designs made" }, { value: 2000, suffix: "+", label: "Photos taken" }],   // SAMPLE
+      image: "assets/images/creative-media-documentation.jpg", gallery: ["", "", ""]
     },
     {
       id: "pr", name: "Public Relations and Student Engagement", short: "PR & Engagement",
@@ -131,7 +126,7 @@ window.STUCO_CONTENT = {
       head: { name: "Department Head", photo: "", quote: "Short editable quote." },
       members: ["Member Name", "Member Name", "Member Name"],
       stats: [{ value: 4, suffix: "", label: "Town halls" }, { value: 500, suffix: "+", label: "Survey replies" }],
-      image: "", gallery: ["", "", ""]
+      image: "assets/images/public-relations-student-engagement.jpg", gallery: ["", "", ""]
     },
     {
       id: "welfare", name: "Student Welfare", short: "Student Welfare",
@@ -143,7 +138,7 @@ window.STUCO_CONTENT = {
       head: { name: "Department Head", photo: "", quote: "Short editable quote." },
       members: ["Member Name", "Member Name", "Member Name"],
       stats: [{ value: 30, suffix: "+", label: "Concerns resolved" }, { value: 3, suffix: "", label: "Wellbeing weeks" }],
-      image: "", gallery: ["", "", ""]
+      image: "assets/images/student-welfare.jpg", gallery: ["", "", ""]
     },
     {
       id: "academics", name: "Academics", short: "Academics",
@@ -155,7 +150,7 @@ window.STUCO_CONTENT = {
       head: { name: "Department Head", photo: "", quote: "Short editable quote." },
       members: ["Member Name", "Member Name", "Member Name"],
       stats: [{ value: 25, suffix: "", label: "Study sessions" }, { value: 150, suffix: "+", label: "Students helped" }],
-      image: "", gallery: ["", "", ""]
+      image: "assets/images/academics.jpg", gallery: ["", "", ""]
     },
     {
       id: "finance", name: "Finance and Treasury", short: "Finance & Treasury",
@@ -167,10 +162,10 @@ window.STUCO_CONTENT = {
       head: { name: "Department Head", photo: "", quote: "Short editable quote." },
       members: ["Member Name", "Member Name"],
       stats: [{ value: 100, suffix: "%", label: "Spending reported" }, { value: 12, suffix: "", label: "Budgets planned" }],
-      image: "", gallery: ["", "", ""]
+      image: "assets/images/finance-treasury.jpg", gallery: ["", "", ""]
     },
     {
-      id: "fundraising", name: "Fundraising and Sponsorship", short: "Fundraising & Sponsorship",
+      id: "fundraising", name: "Fundraising and Sponsorships", short: "Fundraising & Sponsorships",
       tagline: "We find the way to make it real.",
       description: "Responsible for fundraising initiatives, sponsorships, partnerships, and finding resources that allow StuCo projects to become reality.",
       keywords: ["Connect", "Fund", "Build"],
@@ -179,7 +174,7 @@ window.STUCO_CONTENT = {
       head: { name: "Department Head", photo: "", quote: "Short editable quote." },
       members: ["Member Name", "Member Name", "Member Name"],
       stats: [{ value: 5, suffix: "", label: "Partners" }, { value: 8, suffix: "", label: "Fundraisers" }],
-      image: "", gallery: ["", "", ""]
+      image: "assets/images/fundraising-sponsorships.jpg", gallery: ["", "", ""]
     },
     {
       id: "environment", name: "Environment and Social Service", short: "Environment & Service",
@@ -191,7 +186,7 @@ window.STUCO_CONTENT = {
       head: { name: "Department Head", photo: "", quote: "Short editable quote." },
       members: ["Member Name", "Member Name", "Member Name"],
       stats: [{ value: 200, suffix: "kg", label: "Waste diverted" }, { value: 6, suffix: "", label: "Service days" }],
-      image: "", gallery: ["", "", ""]
+      image: "assets/images/environment-social-service.jpg", gallery: ["", "", ""]
     },
     {
       id: "responsibility", name: "Student Responsibility and Discipline", short: "Responsibility & Discipline",
@@ -203,7 +198,7 @@ window.STUCO_CONTENT = {
       head: { name: "Department Head", photo: "", quote: "Short editable quote." },
       members: ["Member Name", "Member Name"],
       stats: [{ value: 1, suffix: "", label: "Respect charter" }, { value: 50, suffix: "+", label: "Students recognised" }],
-      image: "", gallery: ["", "", ""]
+      image: "assets/images/student-responsibility-discipline.jpg", gallery: ["", "", ""]
     },
     {
       id: "technology", name: "Technology and Innovation", short: "Tech & Innovation",
@@ -215,7 +210,7 @@ window.STUCO_CONTENT = {
       head: { name: "Department Head", photo: "", quote: "Short editable quote." },
       members: ["Member Name", "Member Name", "Member Name"],
       stats: [{ value: 3, suffix: "", label: "Systems built" }, { value: 1, suffix: "", label: "Website" }],
-      image: "", gallery: ["", "", ""]
+      image: "assets/images/technology-innovation.jpg", gallery: ["", "", ""]
     }
   ],
 
@@ -226,8 +221,7 @@ window.STUCO_CONTENT = {
     { label: "All" },
     { label: "Events",     departments: ["events"] },
     { label: "Sports",     departments: ["sports"] },
-    { label: "Creative",   departments: ["creative"] },
-    { label: "Media",      departments: ["media"] },
+    { label: "Creative & Media", departments: ["creative"] },
     { label: "Academics",  departments: ["academics"] },
     { label: "Community",  departments: ["pr", "welfare", "finance", "fundraising", "environment", "responsibility"] },
     { label: "Technology", departments: ["technology"] }
@@ -236,7 +230,7 @@ window.STUCO_CONTENT = {
     { title: "Welcome Week",            department: "events",         year: 2026, status: "Completed", image: "", description: "Five days that turned a new school year into a shared beginning." },
     { title: "Inter-House Futsal Cup",  department: "sports",         year: 2026, status: "Ongoing",   image: "", description: "A season-long league where every grade plays, cheers and competes." },
     { title: "The StuCo Identity",      department: "creative",       year: 2026, status: "Completed", image: "", description: "A visual language for the council — from posters to this website." },
-    { title: "One Year in Frames",      department: "media",          year: 2026, status: "Ongoing",   image: "", description: "A documentary of the school year, told through students' eyes." },
+    { title: "One Year in Frames",      department: "creative",       year: 2026, status: "Ongoing",   image: "", description: "A documentary of the school year, told through students' eyes." },
     { title: "Student Town Hall",       department: "pr",             year: 2026, status: "Completed", image: "", description: "An open floor where any student can question, suggest and be heard." },
     { title: "Quiet Corners",           department: "welfare",        year: 2026, status: "Planned",   image: "", description: "Calm spaces on campus for students who need a moment to breathe." },
     { title: "Peer Study Circles",      department: "academics",      year: 2026, status: "Ongoing",   image: "", description: "Students teaching students before every major assessment." },

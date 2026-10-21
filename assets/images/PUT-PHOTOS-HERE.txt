@@ -1,3 +1,0 @@
-Put StuCo photos in this folder, then reference them in content/content.js,
-for example:  photo: "assets/images/president.jpg"
-Large photos: ~1600px wide. Portraits: ~900px wide, 3:4. JPG or WebP, ~80% quality.
