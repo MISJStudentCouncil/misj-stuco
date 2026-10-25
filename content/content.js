@@ -241,22 +241,8 @@ window.STUCO_CONTENT = {
     { title: "StuCo Digital Hub",       department: "technology",     year: 2026, status: "Ongoing",   image: "", description: "The digital home of the journey — the site you are exploring now." }
   ],
 
-  /* ---------- 7. EVENTS (CHAPTER 07) ----------
-     date: "YYYY-MM-DD" (endDate optional). Status is automatic.               */
-  events: [   // SAMPLE events — replace with real ones
-    { title: "Welcome Back Assembly",          date: "2026-08-10", location: "Main Hall",        department: "events",      image: "", description: "The first gathering of the year — new faces, new council, new chapter." },
-    { title: "17 Agustus Celebration",         date: "2026-08-17", location: "School Field",     department: "events",      image: "", description: "Celebrating Indonesian Independence Day with games, pride and school spirit." },
-    { title: "Inter-House Sports Day",         date: "2026-09-18", location: "Sports Complex",   department: "sports",      image: "", description: "A full day of races, relays and loud, proud house colours." },
-    { title: "StuCo Town Hall",                date: "2026-10-02", location: "Auditorium",       department: "pr",          image: "", description: "Students asked the hard questions. StuCo listened — and answered." },
-    { title: "Spirit Week",                    date: "2026-10-26", endDate: "2026-10-30", location: "Whole Campus", department: "events", image: "", description: "Five themed days. One school, louder than ever." },
-    { title: "Bazaar for Good",                date: "2026-11-21", location: "Courtyard",        department: "fundraising", image: "", description: "Student-run stalls, live music and every rupiah going to a cause." },
-    { title: "Peer Study Marathon",            date: "2026-11-28", location: "Library",          department: "academics",   image: "", description: "A full day of student-led revision before the end-of-semester exams." },
-    { title: "Year-End Showcase",              date: "2026-12-11", location: "Main Hall",        department: "creative",    image: "", description: "The work, the stories and the people of the semester — on one stage." }
-  ],
-
   /* ---------- 8. IMPACT NUMBERS (CHAPTER 08) ---------- */
   impact: [   // SAMPLE numbers — replace with real ones
-    { value: 24,  suffix: "+", label: "Events" },
     { value: 850, suffix: "+", label: "Students reached" },
     { value: 18,  suffix: "+", label: "Projects" },
     { value: 120, suffix: "+", label: "Ideas" },
@@ -273,14 +259,13 @@ window.STUCO_CONTENT = {
   ],
 
   /* ---------- 10. THE FUTURE — milestones on the final line ---------- */
-  milestones: ["Ideas", "Leadership", "People", "Departments", "Projects", "Events", "Impact"],
+  milestones: ["Ideas", "Leadership", "People", "Departments", "Projects", "Impact"],
 
   /* ---------- 11. MENU ---------- */
   menu: [
     { label: "Home",        href: "#top" },
     { label: "Journey",     href: "#community" },
     { label: "Departments", href: "#departments" },
-    { label: "Events",      href: "#events" },
     { label: "Projects",    href: "#projects" },
     { label: "Team",        href: "#people" },
     { label: "Impact",      href: "#impact" },

@@ -186,7 +186,7 @@
   SC.reveal = function (root = document, ioRoot = null) {
     const obs = ioRoot ? new IntersectionObserver(onIO, { root: ioRoot, rootMargin: '0px 0px -8% 0px' }) : io;
     $$('[data-split]', root).forEach(SC.split);
-    $$('[data-reveal], [data-split], .ev, [data-count]', root).forEach((el) => obs.observe(el));
+    $$('[data-reveal], [data-split], [data-count]', root).forEach((el) => obs.observe(el));
     if (!ioRoot) $$('.jp-mark', root).forEach((el) => markIO.observe(el));
     return obs;
   };

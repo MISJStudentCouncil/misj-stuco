@@ -60,9 +60,6 @@
     renderFilters(C);
     SC.renderProjects(0);
 
-    /* 07 events */
-    renderEvents(C);
-
     /* 08 impact */
     $('.stats').innerHTML = C.impact.map((s, i) =>
       `<li class="stat"><p class="stat__num" aria-label="${esc(s.value)}${esc(s.suffix || '')}"><span data-count="${esc(s.value)}" aria-hidden="true">0</span><span class="stat__suffix" aria-hidden="true">${esc(s.suffix || '')}</span></p><p class="stat__label"><span class="stat__idx micro">${pad(i + 1)}</span>${esc(s.label)}</p></li>`).join('');
@@ -177,26 +174,4 @@
     SC.projectCount = list.length;
     $('.proj__count').textContent = `01 / ${pad(Math.max(1, list.length))}`;
   };
-
-  /* ---------- 07 events ---------- */
-  function renderEvents(C) {
-    const today = new Date(); today.setHours(0, 0, 0, 0);
-    const evs = C.events.map((e) => ({ ...e, d: parseDate(e.date), end: parseDate(e.endDate || e.date) })).sort((a, b) => a.d - b.d);
-    evs.forEach((e) => { e.up = e.status ? /up|soon|next/i.test(e.status) : e.end >= today; });
-    const nowHTML = `<li class="tl__now" aria-label="Today"><span class="micro">Today · ${today.getDate()} ${MONTHS[today.getMonth()]} ${today.getFullYear()}</span></li>`;
-    let out = '', placed = false, k = 0;
-    evs.forEach((e) => {
-      if (e.up && !placed) { out += nowHTML; placed = true; }
-      const d = SC.deptById(e.department);
-      const range = e.endDate ? ` – ${e.end.getDate()} ${MONTHS[e.end.getMonth()]}` : '';
-      out += `<li class="ev ${e.up ? 'ev--up' : 'ev--past'}${k++ % 2 ? ' ev--r' : ''}"><span class="ev__dot" aria-hidden="true"></span>` +
-        SC.media(e.image, { cls: 'ev__media', alt: e.title, label: 'Event photo · replace', attrs: 'data-cursor="view"' }) +
-        `<div class="ev__text"><span class="tag${e.up ? '' : ' tag--past'}">${e.up ? 'Upcoming' : 'Memory'}</span>` +
-        `<time class="ev__date" datetime="${esc(e.date)}"><span class="ev__day">${pad(e.d.getDate())}</span><span class="ev__mon micro">${MONTHS[e.d.getMonth()]} ${e.d.getFullYear()}${range}</span></time>` +
-        `<h3 class="ev__title">${esc(e.title)}</h3><p class="ev__meta micro"><span>${esc(e.location)}</span><span>${esc(d ? d.short : '')}</span></p>` +
-        `<p class="ev__desc">${esc(e.description)}</p></div></li>`;
-    });
-    if (!placed) out += nowHTML;
-    $('.tl').innerHTML = out;
-  }
 })();
