@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lost &amp; Found — MISJ StuCo</title>
+  <meta name="description" content="MISJ Lost & Found. Photos of items handed in to the library, for MISJ students and staff.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#030a22">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/lost-found.css">
+</head>
+<body class="lf-page">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="atmos" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="lf-sparks" aria-hidden="true">
+    <svg width="0" height="0" style="position:absolute"><symbol id="spark" viewBox="0 0 24 24"><path d="M12 0C12.9 7.6 16.4 11.1 24 12 16.4 12.9 12.9 16.4 12 24 11.1 16.4 7.6 12.9 0 12 7.6 11.1 11.1 7.6 12 0Z"/></symbol></svg>
+    <svg class="spark spark--y" style="--x:88%;--y:16%;--s:20px;--d:.4s"><use href="#spark"/></svg>
+    <svg class="spark" style="--x:93%;--y:22%;--s:10px;--d:1.6s"><use href="#spark"/></svg>
+    <svg class="spark" style="--x:6%;--y:62%;--s:16px;--d:.9s"><use href="#spark"/></svg>
+    <svg class="spark spark--y" style="--x:10%;--y:68%;--s:9px;--d:2.2s"><use href="#spark"/></svg>
+    <svg class="spark" style="--x:62%;--y:9%;--s:9px;--d:1.2s"><use href="#spark"/></svg>
+  </div>
+
+  <header class="nav">
+    <a class="nav__logo lf-nav__logo" href="index.html" aria-label="MISJ Student Council home">
+      <img src="assets/images/stuco-logo.png" alt="MISJ StuCo logo">
+    </a>
+    <div class="lf-nav__right">
+      <div class="lf-who" hidden></div>
+      <a class="nav__menu lf-back" href="index.html"><span aria-hidden="true">←</span><span>StuCo</span></a>
+    </div>
+  </header>
+
+  <main id="main" class="lf-main">
+    <div class="wrap">
+      <header class="lf-head">
+        <p class="label"><span class="jp-mark reached"></span>MISJ StuCo · Library</p>
+        <h1 class="display lf-title">Lost <em>&amp;</em><br>Found.</h1>
+        <p class="lede">Lost something? These are the items handed in to <span class="lf-collect">the library</span>. Spot yours, then come and collect it.</p>
+      </header>
+
+      <section class="lf-card" aria-live="polite">
+        <p class="lf-loading micro">Checking your account…</p>
+      </section>
+
+      <section class="lf-gallery" aria-label="Lost items" hidden>
+        <div class="lf-bar">
+          <span class="micro lf-count">0 items</span>
+          <span class="lf-bar__note">Recognise something? Collect it at <b class="lf-collect">the library</b>.</span>
+          <a class="micro lf-admin-link" href="lostandfoundadmins/" hidden>Admin: add items →</a>
+        </div>
+        <ul class="lf-grid"></ul>
+      </section>
+    </div>
+  </main>
+
+  <footer class="lf-foot micro">
+    <span>MISJ Student Council</span>
+    <a href="index.html">← Back to StuCo</a>
+  </footer>
+
+  <dialog class="lf-box" aria-label="Lost item photo">
+    <div class="lf-box__top">
+      <span class="micro lf-box__num">01 / 01</span>
+      <button class="btn lf-box__close" type="button">Close ✕</button>
+    </div>
+    <div class="lf-box__stage"><img class="lf-box__img" alt=""></div>
+    <div class="lf-box__bottom">
+      <button class="btn lf-box__prev" type="button"><span aria-hidden="true">←</span> Previous</button>
+      <button class="btn lf-box__next" type="button">Next <span aria-hidden="true">→</span></button>
+    </div>
+  </dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="js/lost-found/config.js"></script>
+  <script src="js/lost-found/common.js"></script>
+  <script src="js/lost-found/gallery.js"></script>
+</body>
+</html>

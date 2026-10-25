@@ -405,7 +405,7 @@
     resizers.forEach((fn) => fn());
     SC.measure();
     SC.measureAtmos();
-    SC.journey.build();
+    // journey line removed
   };
   let rt, lastW = innerWidth, lastH = innerHeight;
   addEventListener('resize', () => {
@@ -428,6 +428,6 @@
   SC.tick = function () {
     if (!SC.reduce) runScenes();
     runAtmos();
-    SC.journey.draw();
+    // journey line removed
   };
 })();

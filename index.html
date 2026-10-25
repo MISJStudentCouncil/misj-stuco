@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#030a22">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/chapters.css">
   <link rel="stylesheet" href="css/story.css">
@@ -30,11 +30,6 @@
     <div class="cursor__dot"></div>
   </div>
 
-  <!-- Global journey line -->
-  <div class="journey" aria-hidden="true">
-    <svg class="journey__svg"><g class="journey__g"><path class="journey__ghost"/><path class="journey__path"/></g></svg>
-    <span class="journey__head"></span>
-  </div>
 
   <!-- Floating navigation -->
   <header class="nav">
@@ -75,48 +70,30 @@
       <div class="stage hero__stage">
         <div class="hero__grid" aria-hidden="true"></div>
         <div class="hero__glow" aria-hidden="true"></div>
+        <div class="hero__deco" aria-hidden="true">
+          <svg width="0" height="0" style="position:absolute"><symbol id="spark" viewBox="0 0 24 24"><path d="M12 0C12.9 7.6 16.4 11.1 24 12 16.4 12.9 12.9 16.4 12 24 11.1 16.4 7.6 12.9 0 12 7.6 11.1 11.1 7.6 12 0Z"/></symbol></svg>
+          <svg class="spark" style="--x:12%;--y:22%;--s:22px;--d:0s"><use href="#spark"/></svg>
+          <svg class="spark" style="--x:16%;--y:27%;--s:11px;--d:1.1s"><use href="#spark"/></svg>
+          <svg class="spark spark--y" style="--x:84%;--y:18%;--s:18px;--d:.6s"><use href="#spark"/></svg>
+          <svg class="spark" style="--x:89%;--y:24%;--s:10px;--d:2s"><use href="#spark"/></svg>
+          <svg class="spark spark--y" style="--x:9%;--y:74%;--s:14px;--d:1.6s"><use href="#spark"/></svg>
+          <svg class="spark" style="--x:87%;--y:70%;--s:24px;--d:.3s"><use href="#spark"/></svg>
+          <svg class="spark" style="--x:82%;--y:76%;--s:10px;--d:2.4s"><use href="#spark"/></svg>
+          <svg class="spark" style="--x:30%;--y:12%;--s:9px;--d:1.3s"><use href="#spark"/></svg>
+          <svg class="spark" style="--x:68%;--y:88%;--s:9px;--d:.9s"><use href="#spark"/></svg>
+        </div>
         <svg class="hero__line" aria-hidden="true"><path class="hero__path"/></svg>
         <span class="hero__dot" aria-hidden="true"></span>
-        <img class="hero__logo js-logo" src="assets/misj-logo.webp" alt="Mentari Intercultural School Jakarta logo">
         <div class="hero__center">
+          <span class="hero__badge"><img class="hero__logo" src="assets/images/stuco-logo.png" alt="MISJ StuCo jaguar logo" onerror="this.style.display='none'"></span>
           <h1 class="hero__title" aria-label="StuCo — MISJ Student Council">Student Council</h1>
           <p class="hero__school micro">Mentari Intercultural School Jakarta</p>
           <p class="hero__start"><span class="ydot" aria-hidden="true"></span>Here to serve you</p>
+          <a class="btn btn--big hero__lf" href="lost-found.html" data-cursor="button"><span class="hero__lf-icon" aria-hidden="true">?</span><span>Lost &amp; Found</span><span class="btn__arrow" aria-hidden="true">→</span></a>
         </div>
-        <a class="hero__scroll micro" href="#beginning" data-cursor="button">
+        <a class="hero__scroll micro" href="#community" data-cursor="button">
           <span>Scroll to begin</span><span class="hero__arrow" aria-hidden="true"></span>
         </a>
-      </div>
-    </section>
-
-    <!-- 01 — THE BEGINNING -->
-    <section id="beginning" class="chap begin" data-bg="#0b2c9c" data-chapter="01" data-title="The Beginning" data-jp="0.5,0 0.965,0.14 0.965,0.92">
-      <div class="stage begin__stage">
-        <div class="begin__text">
-          <p class="label"><span class="jp-mark"></span></p>
-          <h2 class="display display--l" data-split>Everything starts with an idea.</h2>
-          <p class="lede" data-reveal>StuCo begins with students who see possibilities, identify problems, ask questions, and imagine ways to make MISJ better.</p>
-        </div>
-        <div class="begin__art" aria-hidden="true">
-          <svg class="seed" viewBox="0 0 600 640">
-            <g class="seed__rot">
-              <circle class="seed__ring" cx="300" cy="300" r="110"/>
-              <circle class="seed__ring" cx="300" cy="300" r="190"/>
-              <circle class="seed__ring" cx="300" cy="300" r="270"/>
-              <path class="seed__ray" pathLength="1" d="M300 300 Q 385 190 505 140"/>
-              <path class="seed__ray" pathLength="1" d="M300 300 Q 430 360 535 445"/>
-              <path class="seed__ray" pathLength="1" d="M300 300 Q 215 420 105 475"/>
-              <path class="seed__ray" pathLength="1" d="M300 300 Q 190 235 90 130"/>
-              <g class="seed__end"><circle cx="505" cy="140" r="5"/><text x="505" y="114" text-anchor="middle">IDEAS</text></g>
-              <g class="seed__end"><circle cx="535" cy="445" r="5"/><text x="535" y="478" text-anchor="middle">PEOPLE</text></g>
-              <g class="seed__end"><circle cx="105" cy="475" r="5"/><text x="105" y="508" text-anchor="middle">ACTION</text></g>
-              <g class="seed__end"><circle cx="90" cy="130" r="5"/><text x="90" y="104" text-anchor="middle">IMPACT</text></g>
-            </g>
-            <path class="seed__tail" pathLength="1" d="M300 300 C 300 420 340 520 300 640"/>
-            <circle class="seed__halo" cx="300" cy="300" r="60"/>
-            <circle class="seed__core" cx="300" cy="300" r="10"/>
-          </svg>
-        </div>
       </div>
     </section>
 
@@ -134,14 +111,19 @@
     <section id="people" class="chap people" data-bg="#071a5c" data-chapter="03" data-title="The People" data-jp="0.5,0.02 0.035,0.16 0.035,0.97">
       <div class="wrap">
         <p class="label"><span class="jp-mark"></span></p>
-        <h2 class="display display--l" data-split>Our Leaders</h2>
+        <h2 class="display display--l" data-split>A journey is never walked alone.</h2>
       </div>
       <div class="crew wrap">
-        <div class="crew__stage"></div>
+        <div class="crew__spot" aria-live="polite"></div>
+        <ul class="crew__stage"></ul>
       </div>
       <div class="heads wrap">
-        <h2 class="heads__title">Our Departments</h2>
+        <p class="label label--sub">Department Heads</p>
         <ul class="heads__strip"></ul>
+        <p class="heads__caption" aria-live="polite"></p>
+      </div>
+      <div class="members">
+        <div class="members__marquee"></div>
       </div>
     </section>
 
@@ -149,9 +131,8 @@
     <section id="departments" class="chap depts" data-bg="#040f3a" data-chapter="04" data-title="The Teams" data-jp="0.035,0.01 0.62,0.1 0.5,0.995">
       <div class="wrap depts__intro">
         <p class="label"><span class="jp-mark"></span></p>
-        <h2 class="display display--xl depts__count" data-split>11 Departments.</h2>
+        <h2 class="display display--xl depts__count" data-split>12 Departments.</h2>
         <p class="display display--l depts__one" data-split>One journey.</p>
-        <p class="lede" data-reveal>Different responsibilities. Different strengths. One Student Council.</p>
       </div>
       <div class="net" role="group" aria-label="StuCo department network">
         <svg class="net__lines" aria-hidden="true"></svg>
@@ -166,22 +147,13 @@
       <ol class="dlist wrap" aria-label="Departments"></ol>
     </section>
 
-    <!-- 05 — FROM IDEAS TO ACTION -->
-    <section id="ideas" class="chap ideas" data-bg="#0b2c9c" data-chapter="05" data-title="Ideas to Action" data-jp="0.5,0.005 0.965,0.06 0.965,0.97">
-      <div class="stage ideas__stage">
-        <div class="ideas__head">
-          <p class="label"><span class="jp-mark"></span></p>
-          <h2 class="display display--m" data-split>An idea is only the beginning.</h2>
-        </div>
-        <ol class="ideas__rail micro" aria-hidden="true">
-          <li>Idea</li><li>Plan</li><li>Team</li><li>Action</li><li>Impact</li>
-        </ol>
-        <div class="ideas__words" aria-hidden="true">
-          <span class="iw">Idea</span><span class="iw">Plan</span><span class="iw">Team</span><span class="iw">Action</span><span class="iw iw--impact"><span class="iw__i">I</span>mpact</span>
-        </div>
-        <p class="sr-only">Idea becomes a plan. A plan finds a team. A team takes action. Action creates impact.</p>
-        <div class="ideas__flood" aria-hidden="true"></div>
+    <!-- 05 — MOMENTS -->
+    <section id="events" class="chap events" data-bg="#050f33" data-chapter="05" data-title="Moments" data-jp="0.035,0.01 0.5,0.12 0.5,0.99">
+      <div class="wrap">
+        <p class="label"><span class="jp-mark"></span></p>
+        <h2 class="display display--l" data-split>The moments we create together.</h2>
       </div>
+      <ol class="tl"></ol>
     </section>
 
     <!-- 06 — WHAT WE CREATE -->
@@ -199,15 +171,6 @@
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- 07 — MOMENTS -->
-    <section id="events" class="chap events" data-bg="#050f33" data-chapter="07" data-title="Moments" data-jp="0.035,0.01 0.5,0.12 0.5,0.99">
-      <div class="wrap">
-        <p class="label"><span class="jp-mark"></span></p>
-        <h2 class="display display--l" data-split>The moments we create together.</h2>
-      </div>
-      <ol class="tl"></ol>
     </section>
 
     <!-- 08 — IMPACT -->
@@ -276,7 +239,7 @@
         <div class="future__final">
           <p class="display display--xl future__yours"><span>The next</span> <span>chapter</span> <span>is yours.</span></p>
           <p class="future__sig micro">MISJ Student Council</p>
-          <a class="btn btn--big" href="#beginning" data-cursor="button"><span>Explore the journey</span><span class="btn__arrow" aria-hidden="true">→</span></a>
+          <a class="btn btn--big" href="#community" data-cursor="button"><span>Explore the journey</span><span class="btn__arrow" aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>

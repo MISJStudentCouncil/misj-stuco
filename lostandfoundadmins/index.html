@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lost &amp; Found Admin — MISJ StuCo</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#030a22">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/lost-found.css">
+</head>
+<body class="lf-page">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="atmos" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="nav__logo lf-nav__logo" href="../index.html" aria-label="MISJ Student Council home">
+      <img src="../assets/images/stuco-logo.png" alt="MISJ StuCo logo">
+    </a>
+    <div class="lf-nav__right">
+      <div class="lf-who" hidden></div>
+      <a class="nav__menu lf-back" href="../lost-found.html"><span aria-hidden="true">←</span><span>Lost &amp; Found</span></a>
+    </div>
+  </header>
+
+  <main id="main" class="lf-main">
+    <div class="wrap">
+      <header class="lf-head">
+        <p class="label"><span class="jp-mark reached"></span>Lost &amp; Found · Admin</p>
+        <h1 class="display lf-title">Add a<br><em>found</em> item.</h1>
+        <p class="lede">Photo, description, the date it was taken in. Press Add. Students only ever see the photo.</p>
+      </header>
+
+      <section class="lf-card" aria-live="polite">
+        <p class="lf-loading micro">Checking your account…</p>
+      </section>
+
+      <div class="lf-desk" hidden>
+        <form class="lf-up" novalidate>
+          <h2>New item</h2>
+          <span class="lf-step micro"><b>01</b>Photo</span>
+          <label class="lf-drop">
+            <input id="lf-file" type="file" accept="image/*" aria-label="Choose a photo of the item">
+            <span class="lf-drop__hint">
+              <span class="lf-drop__plus" aria-hidden="true">+</span>
+              <strong>Choose a photo</strong>
+              <span>or drag one here. On a phone, this opens the camera.</span>
+            </span>
+            <img class="lf-drop__preview" alt="Preview of the chosen photo">
+          </label>
+          <label class="lf-step micro" for="lf-desc"><b>02</b>Description (only admins see this)</label>
+          <textarea id="lf-desc" rows="3" placeholder="e.g. Blue water bottle with stickers, found in the canteen"></textarea>
+          <label class="lf-step micro" for="lf-date"><b>03</b>Date taken in</label>
+          <input id="lf-date" class="lf-date" type="date">
+          <p class="lf-up__note">Tip: keep names and ID cards out of the photo.</p>
+          <button class="btn btn--big lf-up__submit" type="submit"><span>Add item</span><span class="btn__arrow" aria-hidden="true">→</span></button>
+          <p class="lf-up__msg" role="status" aria-live="polite"></p>
+        </form>
+
+        <section class="lf-desk__list" aria-label="Items students can see">
+          <h2>On display</h2>
+          <div class="lf-bar"><span class="micro lf-count">0 items</span><span class="lf-bar__note">When someone collects an item, press <b>Returned · remove</b>.</span></div>
+          <ul class="lf-list"></ul>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="lf-foot micro">
+    <span>MISJ Student Council · Lost &amp; Found</span>
+    <a href="../lost-found.html">See what students see →</a>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="../js/lost-found/config.js"></script>
+  <script src="../js/lost-found/common.js"></script>
+  <script src="../js/lost-found/admin.js"></script>
+</body>
+</html>

@@ -278,13 +278,14 @@ window.STUCO_CONTENT = {
   /* ---------- 11. MENU ---------- */
   menu: [
     { label: "Home",        href: "#top" },
-    { label: "Journey",     href: "#beginning" },
+    { label: "Journey",     href: "#community" },
     { label: "Departments", href: "#departments" },
-    { label: "Projects",    href: "#projects" },
     { label: "Events",      href: "#events" },
+    { label: "Projects",    href: "#projects" },
     { label: "Team",        href: "#people" },
     { label: "Impact",      href: "#impact" },
     { label: "Play",        href: "#game" },
+    { label: "Lost & Found", href: "lost-found.html" },
     { label: "Contact",     href: "#contact" }
   ]
 };

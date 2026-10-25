@@ -11,7 +11,7 @@
   const TAU = Math.PI * 2;
   const line = (c, x1, y1, x2, y2) => { c.beginPath(); c.moveTo(x1, y1); c.lineTo(x2, y2); c.stroke(); };
   const dot = (c, x, y, r, col) => { c.beginPath(); c.arc(x, y, r, 0, TAU); c.fillStyle = col; c.fill(); };
-  const MONO = '"JetBrains Mono", ui-monospace, monospace';
+  const MONO = '"Archivo", "Helvetica Neue", Arial, sans-serif';
   const R = {};
 
   /* 01 Events — animated timelines */

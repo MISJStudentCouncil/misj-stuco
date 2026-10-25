@@ -77,7 +77,7 @@
       scroll.style.opacity = fade;
       metas.forEach((m) => (m.style.opacity = fade));
       glow.style.transform = `translate(-50%,-50%) scale(${1 + 0.5 * e})`;
-      glow.style.opacity = String(1 - 0.4 * e);
+      glow.style.opacity = String((1 - 0.4 * e) * (1 - E.inOut(range(p, 0.5, 1))));
       if (introDone || p > 0.04) { introDone = true; intro = 1; }
       paint();
     }, { staticP: 0 });
@@ -237,8 +237,8 @@
 
   SC.initScenes = function () {
     hero();
-    beginning();
-    ideas();
+    // beginning section removed
+    // ideas section removed
     projects();
     impact();
     future();

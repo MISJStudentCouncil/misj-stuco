@@ -55,6 +55,33 @@ The `id` also chooses the animated motif. You can reuse an existing id's motif w
 
 Copy a block, paste it, and edit it. For a project, set `department` to a department `id`. Event dates use the format `"YYYY-MM-DD"`.
 
+## Lost & Found
+
+Students see `lost-found.html`: a grid of photos and nothing else. It only opens for signed-in school email accounts. Admins (the librarian, plus anyone else you add) manage items at **`/lostandfoundadmins`**. That page is `lostandfoundadmins/index.html`. The photos, descriptions and dates live in Supabase, and Supabase does the access checks on its server, so they can't be bypassed from the browser.
+
+### One-time setup (about 20 minutes)
+
+1. **Create the tables.** In Supabase, open **SQL Editor → New query**. Paste in `supabase/lost-found-setup.sql`, change the two lines in step 6 to your school's email domain and the first admin's email, then press **Run**. It's safe to run again, for example after updating this site.
+2. **Connect the site.** Go to **Project Settings → API**. Copy the **Project URL** and the **anon public** key into `js/lost-found/config.js`. Set `schoolDomains` to the same domain as in step 1. The anon key is meant to be public.
+3. **Allow the login links.** Go to **Authentication → URL Configuration**. Set **Site URL** to the site's address, such as `https://stuco.example.com`. Under **Redirect URLs**, add `https://stuco.example.com/lost-found.html` and `https://stuco.example.com/lostandfoundadmins/`.
+4. **Emails.** Keep **Authentication → Providers → Email → Confirm email** turned on. Supabase's built-in email sender only sends a few emails per hour. Before launch, either:
+   - add your own email sender under **Authentication → Emails → SMTP Settings** (for example Resend, Brevo, or the school's mail server), or
+   - if the school uses Google Workspace, turn on **Authentication → Providers → Google** and set `signIn: "google"` (or `"both"`) in `config.js`. Students then sign in with one click and no email is sent.
+
+### Who has access
+
+- **Students and staff:** anyone with a confirmed email on a domain in the `lf_domains` table. They see photos only.
+- **Admins:** emails in the `lf_librarians` table. To add or remove an admin, use **Table Editor → lf_librarians** and type the email in lowercase. You don't need any code.
+
+### For admins
+
+1. Go to `/lostandfoundadmins` and sign in with your email.
+2. Choose a photo (on a phone this opens the camera), write a short description, check the **date taken in** (it starts as today), and press **Add item**.
+3. To fix a description or date, edit it in the list and press **Save changes**.
+4. When someone collects an item, press **Returned · remove**.
+
+Descriptions and dates are only visible to admins. Students only see the photo. Photos are shrunk and their hidden location data is removed before upload. The old `librarian.html` address now forwards to the admin page.
+
 ## The game: Be The Mentarian
 
 A top-down campus adventure (about 15 minutes) in the "Bonus level" chapter near the end of the page. It lives in `js/game/` and `css/game.css`.
