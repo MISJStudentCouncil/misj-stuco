@@ -91,6 +91,42 @@
     });
   };
 
+  /* ---------- the admin sign-in card: username + password ----------
+     The username is only a nickname for one Supabase account (config.js).
+     The password is checked by Supabase, never in this code. */
+  LF.renderAdminSignIn = function (box) {
+    const A = C.adminLogin || {};
+    box.innerHTML = `
+      <p class="label"><span class="lf-lock" aria-hidden="true"></span>Admins only</p>
+      <h2 class="lf-card__title">Sign in to manage Lost &amp; Found.</h2>
+      <form class="lf-form" novalidate>
+        <label class="micro" for="lf-user">Username</label>
+        <input id="lf-user" type="text" autocomplete="username" autocapitalize="off" spellcheck="false" required>
+        <label class="micro" for="lf-pass">Password</label>
+        <div class="lf-form__row">
+          <input id="lf-pass" type="password" autocomplete="current-password" required>
+          <button class="btn btn--big" type="submit"><span>Sign in</span><span class="btn__arrow" aria-hidden="true">→</span></button>
+        </div>
+      </form>
+      <p class="lf-msg" role="status" aria-live="polite"></p>`;
+    const msg = $('.lf-msg', box);
+    const say = (t, bad) => { msg.textContent = t; msg.classList.toggle('is-bad', !!bad); };
+    const form = $('.lf-form', box);
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const user = $('#lf-user', box).value.trim(), pass = $('#lf-pass', box).value, btn = $('button', form);
+      if (!user || !pass) return say('Please type the username and password.', true);
+      const wrong = 'Wrong username or password.';
+      if (!A.username || !A.email || user.toLowerCase() !== String(A.username).toLowerCase()) return say(wrong, true);
+      btn.disabled = true; say('Signing in…');
+      const { error } = await LF.db.auth.signInWithPassword({ email: A.email, password: pass });
+      btn.disabled = false;
+      if (error) console.warn('Admin sign-in failed:', error.message);
+      if (error) return say(/invalid|credentials/i.test(error.message) ? wrong : error.message, true);
+      form.reset();
+    });
+  };
+
   LF.renderNotConfigured = function (box) {
     box.innerHTML = `<p class="label">Setup needed</p>
       <h2 class="lf-card__title">Lost &amp; Found isn't connected yet.</h2>

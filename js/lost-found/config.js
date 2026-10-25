@@ -17,6 +17,11 @@ window.LF_CONFIG = {
   // or "both".
   signIn: "email",
 
+  // Admin page login. The username is just a nickname for this one Supabase
+  // account; the password is set in Supabase (Authentication -> Users) and is
+  // never stored here. This email must also be in the lf_librarians table.
+  adminLogin: { username: "LOSTANDFOUNDISINLIBRARY", email: "students_council@mis.sch.id" },
+
   // Shown under the photos.
   collectAt: "the library"
 };

@@ -23,7 +23,7 @@
     try { a = await LF.access(); } catch (e) { a = { error: e }; }
     if (!a.session) {
       who.hidden = true; desk.hidden = true; card.hidden = false;
-      return LF.renderSignIn(card, { label: 'Admins only', title: 'Sign in to manage Lost & Found.', text: 'Use the email address that StuCo set up for you.' });
+      return LF.renderAdminSignIn(card);
     }
     LF.renderWho(who, a.email);
     if (!a.librarian) {
