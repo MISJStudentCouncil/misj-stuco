@@ -124,5 +124,5 @@ create policy "lf photos: librarian removes" on storage.objects
 
 -- 6. YOUR VALUES — change these two lines ------------------------------------
 
-insert into public.lf_domains (domain) values ('your-school-domain.sch.id') on conflict do nothing;
-insert into public.lf_librarians (email) values ('librarian@your-school-domain.sch.id') on conflict do nothing;
+insert into public.lf_domains (domain) values ('mis.sch.id') on conflict do nothing;
+insert into public.lf_librarians (email) values ('chicit77@yahoo.com') on conflict do nothing;
