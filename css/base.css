@@ -341,3 +341,21 @@ body.ink-dark .cursor.is-btn .cursor__ring { border-color: var(--ink); }
 
 /* small uppercase labels set with the font shorthand: same width + numerals as .micro */
 [class*="__idx"], [class*="__num"], .skip, .btn, .nav__menu, .tag, .pf, .cursor__label { font-stretch: 112%; font-variant-numeric: tabular-nums; }
+
+/* ---------- FLOATING LOST & FOUND BUTTON ---------- */
+.lf-fab {
+  position: fixed; left: clamp(12px, 2vw, 24px); bottom: clamp(12px, 2vw, 24px); z-index: 120;
+  display: flex; align-items: center; gap: 12px; max-width: min(320px, calc(100vw - 24px));
+  padding: 10px 18px 10px 10px; border-radius: 999px;
+  background: var(--yellow); color: var(--navy-950); text-decoration: none;
+  font-size: 13px; line-height: 1.25;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .4), 0 0 24px var(--yellow-glow);
+  transition: transform .35s var(--ease);
+}
+.lf-fab:hover { transform: translateY(-3px) scale(1.03); }
+.lf-fab__icon {
+  flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%;
+  background: var(--navy-950); color: var(--yellow); font-weight: 900; font-size: 18px;
+}
+.lf-fab strong { display: block; font-weight: 800; }
+@media (max-width: 480px) { .lf-fab { font-size: 12px; gap: 10px; padding: 8px 14px 8px 8px; } .lf-fab__icon { width: 32px; height: 32px; } }

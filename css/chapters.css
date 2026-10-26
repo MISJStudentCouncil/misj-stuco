@@ -21,8 +21,8 @@
   background: radial-gradient(closest-side, rgba(26, 71, 214, .42), rgba(10, 36, 130, .14) 45%, transparent 72%);
 }
 .hero__center { --logo: clamp(96px, 14vw, 168px); --gap: clamp(14.4px, 3vh, 28.8px); position: relative; z-index: 2; text-align: center; will-change: transform, opacity; }
-.hero__badge { position: relative; display: block; width: var(--logo); height: var(--logo); margin: 0 auto var(--gap); }
-.hero__logo { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 28px rgba(255, 205, 60, .18)); opacity: 0; transition: opacity 1.4s var(--ease) .6s; pointer-events: none; }
+.hero__badge { position: relative; display: flex; align-items: center; justify-content: center; gap: clamp(16px, 2.4vw, 32px); height: var(--logo); margin: 0 auto var(--gap); }
+.hero__logo { position: relative; z-index: 1; display: block; flex: none; width: var(--logo); height: 100%; object-fit: contain; filter: drop-shadow(0 0 28px rgba(255, 205, 60, .18)); opacity: 0; transition: opacity .8s var(--ease) .2s; pointer-events: none; }
 .loaded .hero__logo { opacity: 1; }
 .arrived .hero__logo { transition: none; }
 /* sparkles + corner frame */
@@ -42,29 +42,30 @@
 .hero__title .ch {
   display: inline-block; white-space: pre; opacity: 0; filter: blur(16px);
   transform: translate3d(0, .32em, 0) scale(1.05);
-  transition: opacity 1.4s var(--ease), transform 1.7s var(--ease), filter 1.4s var(--ease);
-  transition-delay: calc(.3s + var(--i) * .09s);
+  transition: opacity .8s var(--ease), transform 1s var(--ease), filter .8s var(--ease);
+  transition-delay: calc(.1s + var(--i) * .04s);
 }
 .loaded .hero__title .ch { opacity: 1; filter: none; transform: none; }
-.hero__school { margin-top: clamp(14.4px, 3.4vh, 30.4px); font-family: var(--f-display); font-weight: 600; font-stretch: 112%; font-size: clamp(.8rem, .96vw, 1.1rem); letter-spacing: .3em; color: var(--mist); opacity: 0; transition: opacity 1.4s 1.15s; will-change: transform; }
+.hero__school { margin-top: clamp(14.4px, 3.4vh, 30.4px); font-family: var(--f-display); font-weight: 600; font-stretch: 112%; font-size: clamp(.8rem, .96vw, 1.1rem); letter-spacing: .3em; color: var(--mist); opacity: 0; transition: opacity .8s .5s; will-change: transform; }
 .loaded .hero__school { opacity: 1; }
 .hero__start {
   margin-top: clamp(32px, 8vh, 72px);
   font-weight: 500; font-stretch: 112%; text-transform: uppercase; letter-spacing: .02em;
   font-size: clamp(1rem, 1.24vw, 1.5rem);
   opacity: 0; transform: translateY(14.4px); filter: blur(6px);
-  transition: opacity 1.3s var(--ease) 2.1s, transform 1.3s var(--ease) 2.1s, filter 1.3s var(--ease) 2.1s;
+  transition: opacity .8s var(--ease) .8s, transform .8s var(--ease) .8s, filter .8s var(--ease) .8s;
 }
 .loaded .hero__start { opacity: 1; transform: none; filter: none; }
 /* Lost & Found call to action */
+.hero__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(12px, 1.6vw, 20px); margin-top: clamp(22px, 4vh, 40px); }
 .hero__lf {
-  position: relative; margin-top: clamp(22px, 4vh, 40px);
+  position: relative;
   font-size: clamp(.9rem, 1vw, 1.15rem); padding: 1.25em 2.1em 1.25em 1.25em; gap: 1em;
   box-shadow: 0 0 0 0 rgba(255, 210, 31, .5), 0 18px 50px -14px var(--yellow-glow);
   opacity: 0; transform: translateY(14.4px);
-  transition: opacity 1.3s var(--ease) 2.4s, transform 1.3s var(--ease) 2.4s, background .45s var(--ease), color .45s var(--ease), border-color .45s;
+  transition: opacity .8s var(--ease) 1s, transform .8s var(--ease) 1s, background .45s var(--ease), color .45s var(--ease), border-color .45s;
 }
-.loaded .hero__lf { opacity: 1; transform: none; animation: lfPulse 2.6s var(--ease) 3.6s infinite; }
+.loaded .hero__lf { opacity: 1; transform: none; animation: lfPulse 2.6s var(--ease) 2s infinite; }
 .arrived .hero__lf { transition: background .45s var(--ease), color .45s var(--ease), border-color .45s; }
 .hero__lf-icon { display: grid; place-items: center; width: 2em; height: 2em; border-radius: 50%; background: var(--navy-950); color: var(--yellow); font-weight: 800; font-family: var(--f-display); }
 @keyframes lfPulse { 0% { box-shadow: 0 0 0 0 rgba(255, 210, 31, .5), 0 18px 50px -14px var(--yellow-glow); } 70%, 100% { box-shadow: 0 0 0 18px rgba(255, 210, 31, 0), 0 18px 50px -14px var(--yellow-glow); } }
@@ -84,14 +85,14 @@
 }
 .loaded .hero__dot { opacity: 1; }
 @keyframes ping { from { transform: scale(.4); opacity: .9; } to { transform: scale(2.4); opacity: 0; } }
-.hero__meta { position: absolute; bottom: clamp(17.6px, 4.5vh, 35.2px); color: rgba(255, 255, 255, .5); opacity: 0; transition: opacity 1.2s 2.6s; }
+.hero__meta { position: absolute; bottom: clamp(17.6px, 4.5vh, 35.2px); color: rgba(255, 255, 255, .5); opacity: 0; transition: opacity .8s 1.1s; }
 .hero__meta--l { left: var(--gutter); }
 .hero__meta--r { right: var(--gutter); }
 .loaded .hero__meta { opacity: 1; }
 .hero__scroll {
   position: absolute; left: 50%; bottom: clamp(17.6px, 4.5vh, 35.2px); z-index: 3;
   display: flex; flex-direction: column; align-items: center; gap: 11.2px;
-  transform: translateX(-50%); opacity: 0; transition: opacity 1.2s 2.9s;
+  transform: translateX(-50%); opacity: 0; transition: opacity .8s 1.2s;
 }
 .loaded .hero__scroll { opacity: 1; }
 /* once the arrival has played, scroll drives these directly */
@@ -123,7 +124,7 @@
 .seed__core { fill: var(--yellow); }
 
 /* ---------- 02 THE COMMUNITY ---------- */
-.comm { padding-block: clamp(56px, 10vh, 96px) clamp(48px, 10vh, 88px); overflow: hidden; }
+.comm { padding-block: clamp(24px, 4vh, 40px) clamp(48px, 10vh, 88px); overflow: hidden; }
 .comm__bg { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
 .comm__bg i { position: absolute; inset: 0; opacity: 0; transition: opacity 1s var(--ease); }
 .comm__bg i:nth-child(1) { background: repeating-radial-gradient(circle at 16% 46%, rgba(255, 255, 255, .075) 0 1px, transparent 1.5px 38.4px); }
@@ -270,3 +271,8 @@
 .reduce .marq { white-space: normal; }
 .reduce .comm__bg i:nth-child(4) { animation: none; }
 
+
+/* ---------- 05 FIND YOUR LOST ITEMS ---------- */
+.lfsec { padding-block: clamp(72px, 14vh, 160px); }
+.lfsec__inner { display: grid; justify-items: start; gap: clamp(18px, 3vh, 32px); }
+.lfsec__lead { max-width: 34em; color: var(--mist); font-size: clamp(1rem, 1.2vw, 1.3rem); line-height: 1.5; }

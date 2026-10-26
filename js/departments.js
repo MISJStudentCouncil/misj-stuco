@@ -14,7 +14,7 @@
     const D = SC.C.departments;
     const net = $('.net'), svg = $('.net__lines'), ul = $('.net__nodes'), info = $('.net__info'), canvas = $('.net__motif');
     ul.innerHTML = D.map((d, i) =>
-      `<li class="nnode"><button class="nnode__btn" type="button" data-dept="${i}" data-cursor="explore" aria-label="${esc(d.name)} — explore this department"><span class="nnode__dot" aria-hidden="true"></span><span class="nnode__txt" aria-hidden="true"><span class="nnode__num micro">${pad(i + 1)}</span><span class="nnode__name">${esc(d.short || d.name)}</span></span></button></li>`).join('');
+      `<li class="nnode"><div class="nnode__btn"><span class="nnode__dot" aria-hidden="true"></span><span class="nnode__txt" aria-hidden="true"><span class="nnode__num micro">${pad(i + 1)}</span><span class="nnode__name">${esc(d.short || d.name)}</span></span></div></li>`).join('');
     svg.innerHTML = D.map(() => '<path class="spoke"/>').join('') + '<path class="ring"/>';
     const nodes = $$('.nnode', ul), spokes = $$('.spoke', svg), ring = $('.ring', svg);
     let W = 0, H = 0, cx = 0, cy = 0, r0 = 0, base = [], visible = false, active = -1, motif = null;
@@ -118,9 +118,6 @@
           <figcaption class="dv-head__cap"><span class="micro">Head of department</span><strong>${esc(d.head.name)}</strong></figcaption></figure>
         <div data-reveal style="--d:.1s"><p class="micro dv-members-label">Members</p><ul class="dv-members">${(d.members || []).map((m) => `<li>${esc(m)}</li>`).join('')}</ul></div>
       </div></section>
-      <section class="dv-block"><p class="dv-label micro">Our projects</p>${projects.length
-        ? `<ul class="dv-projects">${projects.map(({ p, idx }) => `<li data-reveal><button class="dv-proj" type="button" data-project="${idx}" data-cursor="open"><span class="dv-proj__title">${esc(p.title)}</span><span class="micro">${esc(p.status)}</span><span class="micro">${esc(p.year)}</span></button></li>`).join('')}</ul>`
-        : '<p class="dv-empty">No projects listed yet — the first one could be yours.</p>'}</section>
       <section class="dv-block"><p class="dv-label micro">Our impact</p><div class="dv-stats">${(d.stats || []).map((s) => `<div data-reveal><p class="dv-stat__num" aria-label="${esc(s.value)}${esc(s.suffix || '')}"><b data-count="${esc(s.value)}" aria-hidden="true" style="font-weight:inherit">0</b><span aria-hidden="true">${esc(s.suffix || '')}</span></p><p class="dv-stat__label micro">${esc(s.label)}</p></div>`).join('')}</div></section>
       <section class="dv-block dv-block--full"><p class="dv-label micro">Gallery</p><div class="dv-gallery">${gallery.map((g, k) => SC.media(g, { alt: `${d.name} — gallery photo ${k + 1}`, label: 'Gallery · replace', attrs: 'data-cursor="view"' })).join('')}</div></section>
       <nav class="dv-nav" aria-label="Department navigation">
@@ -245,12 +242,6 @@
 
   SC.initDepartments = function () {
     network();
-    document.addEventListener('click', (e) => {
-      const b = e.target.closest('[data-dept]');
-      if (b) SC.openDept(+b.dataset.dept, b);
-    });
     addEventListener('resize', () => { if (isOpen) fitTitle(); });
-    const m = location.hash.match(/^#department\/(.+)$/);
-    if (m) { const i = SC.deptIndex(decodeURIComponent(m[1])); if (i >= 0) setTimeout(() => SC.openDept(i, null, { fromHistory: true }), 300); }
   };
 })();

@@ -30,6 +30,6 @@
     SC.heroIntro();
   };
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(arrive);
-  setTimeout(arrive, 2500);
+  setTimeout(arrive, 800);
   addEventListener('load', () => SC.refresh());
 })();

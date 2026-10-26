@@ -85,25 +85,18 @@
         <svg class="hero__line" aria-hidden="true"><path class="hero__path"/></svg>
         <span class="hero__dot" aria-hidden="true"></span>
         <div class="hero__center">
-          <span class="hero__badge"><img class="hero__logo" src="assets/images/stuco-logo.png" alt="MISJ StuCo jaguar logo" onerror="this.style.display='none'"></span>
+          <span class="hero__badge"><img class="hero__logo" src="assets/misj-logo.webp" alt="MISJ school logo" onerror="this.style.display='none'"><img class="hero__logo" src="assets/images/stuco-logo.png" alt="MISJ StuCo logo" onerror="this.style.display='none'"></span>
           <h1 class="hero__title" aria-label="StuCo — MISJ Student Council">Student Council</h1>
           <p class="hero__school micro">Mentari Intercultural School Jakarta</p>
-          <p class="hero__start"><span class="ydot" aria-hidden="true"></span>Here to serve you</p>
-          <a class="btn btn--big hero__lf" href="lost-found.html" data-cursor="button"><span class="hero__lf-icon" aria-hidden="true">?</span><span>Lost &amp; Found</span><span class="btn__arrow" aria-hidden="true">→</span></a>
+          <p class="hero__start">Here to serve you</p>
+          <div class="hero__actions">
+            <a class="btn btn--big hero__lf" href="lost-found.html" data-cursor="button"><span class="hero__lf-icon" aria-hidden="true">?</span><span>Lost &amp; Found</span><span class="btn__arrow" aria-hidden="true">→</span></a>
+            <a class="btn btn--big hero__lf" href="#people" data-cursor="button"><span class="hero__lf-icon" aria-hidden="true">↓</span><span>Explore</span><span class="btn__arrow" aria-hidden="true">→</span></a>
+          </div>
         </div>
-        <a class="hero__scroll micro" href="#community" data-cursor="button">
+        <a class="hero__scroll micro" href="#people" data-cursor="button">
           <span>Scroll to begin</span><span class="hero__arrow" aria-hidden="true"></span>
         </a>
-      </div>
-    </section>
-
-    <!-- 02 — THE COMMUNITY -->
-    <section id="community" class="chap comm" data-bg="#0a2482" data-chapter="02" data-title="The Community" data-jp="0.965,0.02 0.86,0.22 0.1,0.55 0.5,0.99">
-      <div class="comm__bg" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-      <div class="wrap">
-        <p class="label"><span class="jp-mark"></span></p>
-        <h2 class="display display--m" data-split>We are more than a council.</h2>
-        <ul class="comm__words"></ul>
       </div>
     </section>
 
@@ -142,96 +135,17 @@
           <div class="net__info" aria-live="polite"></div>
         </div>
         <ul class="net__nodes"></ul>
-        <p class="net__hint micro">Hover to discover · Click to explore</p>
       </div>
       <ol class="dlist wrap" aria-label="Departments"></ol>
     </section>
 
-    <!-- 06 — WHAT WE CREATE -->
-    <section id="projects" class="chap proj" data-bg="#061548" data-chapter="06" data-title="What We Create" data-jp="0.5,0.005 0.035,0.12 0.035,0.985">
-      <div class="wrap proj__intro">
+    <!-- 05 — FIND YOUR LOST ITEMS -->
+    <section id="lostfound" class="chap lfsec" data-bg="#071a5c" data-chapter="05" data-title="Lost &amp; Found">
+      <div class="wrap lfsec__inner">
         <p class="label"><span class="jp-mark"></span></p>
-        <h2 class="display display--l" data-split>Ideas leave a trace.</h2>
-        <div class="proj__filters" role="group" aria-label="Filter projects by category"></div>
-      </div>
-      <div class="proj__pin">
-        <div class="proj__stage">
-          <ul class="proj__track"></ul>
-          <div class="proj__progress micro" aria-hidden="true">
-            <span class="proj__count">01 / 01</span><span class="proj__bar"><i></i></span><span class="proj__hint">Keep scrolling →</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 08 — IMPACT -->
-    <section id="impact" class="chap impact" data-bg="#0a2aa0" data-chapter="08" data-title="Impact" data-jp="0.5,0.01 0.93,0.22 0.93,0.995">
-      <div class="impact__ghost" aria-hidden="true">Impact</div>
-      <div class="wrap">
-        <p class="label"><span class="jp-mark"></span></p>
-        <h2 class="display display--xl" data-split>Small actions. Bigger change.</h2>
-      </div>
-      <ul class="stats"></ul>
-    </section>
-
-    <!-- INTERLUDE — STUDENT VOICE -->
-    <section id="voice" class="chap voice" data-bg="#f3f1ea" data-blend="30" data-ink="dark" data-chapter="08" data-title="Your Voice">
-      <div class="wrap">
-        <p class="label"></p>
-        <h2 class="display display--xl voice__title" data-split>What do you want to <mark>change?</mark></h2>
-        <p class="lede" data-reveal>StuCo exists because students have ideas.</p>
-      </div>
-      <ul class="voice__opts"></ul>
-    </section>
-
-    <!-- BONUS LEVEL — BE THE MENTARIAN (the game lives in js/game/) -->
-    <section id="game" class="chap game" data-bg="#050f33" data-chapter="08" data-title="Be The Mentarian" data-jp="0.5,0 0.035,0.1 0.035,0.98">
-      <div class="wrap game__intro">
-        <p class="label"><span class="jp-mark"></span></p>
-        <h2 class="display display--xl game__title" data-split>Be the <em>Mentarian.</em></h2>
-        <p class="lede" data-reveal>A 15-minute open-world game set on our campus. Pick up what others walk past, show up to every class, help the people around you — and earn your place as a true Mentarian.</p>
-      </div>
-      <div class="wrap game__stage">
-        <div class="game__screen" data-reveal>
-          <canvas class="game__preview" aria-hidden="true"></canvas>
-          <div class="game__ui">
-            <p class="game__press"><span>Bonus level · ~15 min</span>Press start<b>_</b></p>
-            <div class="game__btns">
-              <button type="button" class="btn btn--big js-game-start" data-cursor="button"><span>Start game</span><span class="btn__arrow" aria-hidden="true">→</span></button>
-              <button type="button" class="btn js-game-continue" data-cursor="button" hidden>Continue</button>
-            </div>
-          </div>
-        </div>
-        <div data-reveal style="--d:.15s">
-          <ul class="game__facts">
-            <li><strong>12</strong><span>pieces of litter to clean up</span></li>
-            <li><strong>5</strong><span>classes to pass</span></li>
-            <li><strong>4</strong><span>people who need your help</span></li>
-            <li><strong>1</strong><span>certificate to earn</span></li>
-          </ul>
-          <p class="game__controls micro">WASD / arrows to move · E or Space to talk · Shift to run · J journal · Esc pause · touch controls on phones</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 09 — THE FUTURE -->
-    <section id="future" class="chap future" data-bg="#061a66" data-chapter="09" data-title="The Future" data-jp="0.035,0 0.02,0.06">
-      <div class="stage future__stage">
-        <div class="future__head">
-          <p class="label"><span class="jp-mark"></span></p>
-          <h2 class="display display--l" data-split>The journey doesn't end here.</h2>
-        </div>
-        <div class="future__line" aria-hidden="true">
-          <svg class="future__svg"><path class="future__ghost"/><path class="future__path"/></svg>
-          <div class="future__marks"></div>
-          <span class="future__dot"></span>
-        </div>
-        <ol class="sr-only future__list"></ol>
-        <div class="future__final">
-          <p class="display display--xl future__yours"><span>The next</span> <span>chapter</span> <span>is yours.</span></p>
-          <p class="future__sig micro">MISJ Student Council</p>
-          <a class="btn btn--big" href="#community" data-cursor="button"><span>Explore the journey</span><span class="btn__arrow" aria-hidden="true">→</span></a>
-        </div>
+        <h2 class="display display--l" data-split>Find your lost items.</h2>
+        <p class="lfsec__lead">Misplaced something at school? Browse everything that has been handed in to the student lost and found.</p>
+        <a class="btn btn--big" href="lost-found.html" data-cursor="button"><span>Search lost &amp; found</span><span class="btn__arrow" aria-hidden="true">→</span></a>
       </div>
     </section>
   </main>
@@ -250,7 +164,6 @@
       <ul class="foot__social" aria-label="Social media"></ul>
     </div>
     <p class="foot__statement">Built by students. For students. <span class="y">For MISJ.</span></p>
-    <p class="foot__copy micro">© <span class="js-year"></span> MISJ Student Council · Mentari Intercultural School Jakarta</p>
   </footer>
 
   <!-- Department experience (opens without reloading) -->
@@ -273,6 +186,8 @@
     </div>
   </div>
 
+  <a class="lf-fab" href="lost-found.html" data-cursor="button"><span class="lf-fab__icon" aria-hidden="true">?</span><span class="lf-fab__text">Lost something? <strong>Check our lost and found!</strong></span></a>
+
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
   <script src="content/content.js" defer></script>
   <script src="js/core.js" defer></script>
@@ -280,11 +195,6 @@
   <script src="js/render.js" defer></script>
   <script src="js/scenes.js" defer></script>
   <script src="js/departments.js" defer></script>
-  <script src="js/game/world.js" defer></script>
-  <script src="js/game/sprites.js" defer></script>
-  <script src="js/game/minigames.js" defer></script>
-  <script src="js/game/quests.js" defer></script>
-  <script src="js/game/engine.js" defer></script>
   <script src="js/app.js" defer></script>
 </body>
 </html>

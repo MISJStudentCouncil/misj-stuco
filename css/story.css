@@ -144,7 +144,7 @@
 
 /* ---------- FOOTER ---------- */
 .foot { background: var(--navy-950); padding: clamp(64px, 14vh, 120px) var(--gutter) 24px; border-top: 1px solid var(--hair); }
-.foot__top { display: flex; align-items: center; flex-wrap: wrap; gap: 14.4px 20.8px; }
+.foot__top { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 14.4px 20.8px; }
 .foot__logo img { height: clamp(38.4px, 4vw, 51.2px); width: auto; max-width: 192px; object-fit: contain; }
 .foot__stuco { height: clamp(35.2px, 3.6vw, 46.4px); width: auto; }
 .foot__name { font-weight: 800; font-stretch: 116%; text-transform: uppercase; letter-spacing: -.02em; font-size: clamp(1.2rem, 1.6vw, 1.9rem); }
@@ -157,9 +157,9 @@
 .foot__contact a { color: var(--white); border-bottom: 1px solid var(--faint); transition: border-color .3s; justify-self: start; }
 .foot__contact a:hover { border-color: var(--yellow); }
 .foot__social { display: flex; gap: 9.6px; align-items: flex-start; }
-.foot__social a { display: grid; place-items: center; width: 38.4px; height: 38.4px; border: 1px solid var(--faint); border-radius: 50%; transition: background .35s, color .35s, border-color .35s; }
+.foot__social a { display: grid; place-items: center; width: 88px; height: 88px; border: 1px solid var(--faint); border-radius: 50%; transition: background .35s, color .35s, border-color .35s; }
 .foot__social a:hover { background: var(--yellow); border-color: var(--yellow); color: var(--navy-950); }
-.foot__social svg { width: 14.4px; height: 14.4px; fill: currentColor; }
+.foot__social svg { width: 40px; height: 40px; fill: currentColor; }
 .foot__statement { margin-top: clamp(56px, 13vh, 120px); font-weight: 900; font-stretch: 122%; text-transform: uppercase; letter-spacing: -.045em; line-height: .86; font-size: clamp(2.4rem, 5.76vw, 9.4rem); }
 .foot__statement .y { color: var(--yellow); }
 .foot__copy { margin-top: 35.2px; color: rgba(255, 255, 255, .42); }

@@ -6,6 +6,7 @@
 .depts { padding-top: clamp(48px, 10vh, 88px); padding-bottom: clamp(32px, 8vh, 80px); }
 .depts__count { font-size: min(7.68vw, 15.5rem); }
 .depts__one { color: var(--yellow); margin-top: .12em; }
+.depts__intro { text-align: center; }
 .depts__intro .lede { margin-top: clamp(19.2px, 4.5vh, 38.4px); }
 
 /* ---------- network ---------- */

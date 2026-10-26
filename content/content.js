@@ -35,15 +35,13 @@ window.STUCO_CONTENT = {
 
   /* ---------- 2. CONTACT & SOCIALS ---------- */
   contact: {
-    email: "stuco@example.com",                 // SAMPLE — replace with the real StuCo email
+    email: "students_council@mis.sch.id",
     location: "Mentari Intercultural School Jakarta, Jakarta, Indonesia",
     office: "Find us in the StuCo room or talk to any council member."
   },
   socials: [
     // icon can be: instagram, tiktok, youtube, linkedin, email
-    { label: "Instagram", icon: "instagram", url: "https://instagram.com/" },   // SAMPLE
-    { label: "TikTok",    icon: "tiktok",    url: "https://tiktok.com/" },      // SAMPLE
-    { label: "YouTube",   icon: "youtube",   url: "https://youtube.com/" }      // SAMPLE
+    { label: "Instagram", icon: "instagram", url: "https://instagram.com/misj.stuco" },
   ],
 
   /* ---------- 3. CHAPTER 02 — THE FOUR WORDS ---------- */
@@ -264,12 +262,8 @@ window.STUCO_CONTENT = {
   /* ---------- 11. MENU ---------- */
   menu: [
     { label: "Home",        href: "#top" },
-    { label: "Journey",     href: "#community" },
     { label: "Departments", href: "#departments" },
-    { label: "Projects",    href: "#projects" },
     { label: "Team",        href: "#people" },
-    { label: "Impact",      href: "#impact" },
-    { label: "Play",        href: "#game" },
     { label: "Lost & Found", href: "lost-found.html" },
     { label: "Contact",     href: "#contact" }
   ]

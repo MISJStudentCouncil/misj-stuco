@@ -43,10 +43,6 @@
     $('.foot__social').innerHTML = C.socials.map((s) =>
       `<li><a href="${esc(s.url)}" target="_blank" rel="noopener" aria-label="${esc(s.label)} (opens in a new tab)" data-cursor="button">${ICONS[s.icon] || ICONS.email}</a></li>`).join('');
 
-    /* 02 community words */
-    $('.comm__words').innerHTML = C.community.map((w, i) =>
-      `<li class="cword"><button class="cword__btn" type="button" aria-describedby="cw-${i}"><span>${esc(w.word)}</span><span class="cword__idx" aria-hidden="true">${pad(i + 1)}</span></button><p class="cword__line" id="cw-${i}">${esc(w.line)}</p></li>`).join('');
-    initCommunity();
 
     /* 03 people */
     renderPeople(C, D);
@@ -54,26 +50,10 @@
     /* 04 departments: heading + mobile list (the network is built in departments.js) */
     $('.depts__count').textContent = `${D.length} Departments.`;
     $('.dlist').innerHTML = D.map((d, i) =>
-      `<li><button class="dl__btn" type="button" data-dept="${i}" data-cursor="explore"><span class="dl__dot" aria-hidden="true"></span><span class="dl__num micro">${pad(i + 1)} / ${pad(D.length)}</span><span class="dl__name">${esc(d.name)}</span><span class="dl__keys micro">${d.keywords.map(esc).join(' → ')}</span><span class="dl__go" aria-hidden="true">→</span></button></li>`).join('');
+      `<li><div class="dl__btn"><span class="dl__dot" aria-hidden="true"></span><span class="dl__num micro">${pad(i + 1)} / ${pad(D.length)}</span><span class="dl__name">${esc(d.name)}</span><span class="dl__keys micro">${d.keywords.map(esc).join(' → ')}</span></div></li>`).join('');
 
-    /* 06 projects */
-    renderFilters(C);
-    SC.renderProjects(0);
+    /* 06 projects section removed */
 
-    /* 08 impact */
-    $('.stats').innerHTML = C.impact.map((s, i) =>
-      `<li class="stat"><p class="stat__num" aria-label="${esc(s.value)}${esc(s.suffix || '')}"><span data-count="${esc(s.value)}" aria-hidden="true">0</span><span class="stat__suffix" aria-hidden="true">${esc(s.suffix || '')}</span></p><p class="stat__label"><span class="stat__idx micro">${pad(i + 1)}</span>${esc(s.label)}</p></li>`).join('');
-
-    /* student voice */
-    $('.voice__opts').innerHTML = C.voice.map((v, i) => {
-      const url = v.url || `mailto:${C.contact.email}?subject=${encodeURIComponent(v.title + ' — StuCo')}`;
-      const ext = isExternal(url);
-      return `<li class="vopt"><a href="${esc(url)}"${ext ? ' target="_blank" rel="noopener"' : ''} data-cursor="button"${ext ? ` aria-label="${esc(v.title)} (opens in a new tab)"` : ''}><span class="vopt__idx micro">${pad(i + 1)}</span><span><span class="vopt__title">${esc(v.title)}</span><span class="vopt__text">${esc(v.text)}</span></span><span class="vopt__arrow" aria-hidden="true">→</span></a></li>`;
-    }).join('');
-
-    /* 09 future milestones */
-    $('.future__marks').innerHTML = C.milestones.map((m) => `<div class="fm"><span class="fm__dot"></span><span class="fm__label micro">${esc(m)}</span></div>`).join('');
-    $('.future__list').innerHTML = C.milestones.map((m) => `<li>${esc(m)}</li>`).join('');
   };
 
   /* ---------- 02 community interaction ---------- */

@@ -51,7 +51,7 @@
     /* the point begins moving after the title has arrived */
     function runIntro() {
       if (SC.reduce) { intro = 1; introDone = true; paint(); return; }
-      const t0 = performance.now() + 2300, dur = 3600;
+      const t0 = performance.now() + 600, dur = 2000;
       const step = (now) => {
         intro = E.inOut(clamp((now - t0) / dur));
         if (scrollP > 0.04) intro = 1;
@@ -239,8 +239,6 @@
     hero();
     // beginning section removed
     // ideas section removed
-    projects();
-    impact();
-    future();
+    // projects section removed
   };
 })();
