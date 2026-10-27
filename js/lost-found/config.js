@@ -15,7 +15,7 @@ window.LF_CONFIG = {
   // How people sign in: "email" (a login link is emailed to them),
   // "google" (Sign in with Google: needs the Google provider set up in Supabase),
   // or "both".
-  signIn: "email",
+  signIn: "google",
 
   // Admin page login. The username is just a nickname for this one Supabase
   // account; the password is set in Supabase (Authentication -> Users) and is
