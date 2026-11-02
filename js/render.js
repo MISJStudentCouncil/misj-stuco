@@ -17,6 +17,12 @@
 
   const parseDate = (s) => { const [y, m, d] = String(s).split('-').map(Number); return new Date(y, (m || 1) - 1, d || 1); };
   const isExternal = (u) => /^https?:/i.test(u);
+  /* letter-by-letter reveal: letters stay inside their word so long lines still wrap between words */
+  const splitChars = (el, text) => {
+    let i = 0;
+    el.innerHTML = text.trim().split(/\s+/).map((word) =>
+      `<span class="ch-word">${Array.from(word).map((ch) => `<span class="ch" aria-hidden="true" style="--i:${i++}">${esc(ch)}</span>`).join('')}</span>`).join(' ');
+  };
 
   SC.render = function (C) {
     SC.C = C;
@@ -31,7 +37,7 @@
     $$('.js-term').forEach((el) => (el.textContent = C.site.term || ''));
     $$('.js-year').forEach((el) => (el.textContent = new Date().getFullYear()));
     const title = $('.hero__title');
-    title.innerHTML = Array.from(title.textContent.trim()).map((ch, i) => `<span class="ch" aria-hidden="true" style="--i:${i}">${esc(ch)}</span>`).join('');
+    splitChars(title, title.textContent);
 
     /* menu + footer navigation */
     $('.menu__list').innerHTML = C.menu.map((m, i) =>
@@ -43,6 +49,8 @@
     $('.foot__social').innerHTML = C.socials.map((s) =>
       `<li><a href="${esc(s.url)}" target="_blank" rel="noopener" aria-label="${esc(s.label)} (opens in a new tab)" data-cursor="button">${ICONS[s.icon] || ICONS.email}</a></li>`).join('');
 
+    /* 00 hero panel: events + announcements */
+    renderBoard(C);
 
     /* 03 people */
     renderPeople(C, D);
@@ -55,6 +63,28 @@
     /* 06 projects section removed */
 
   };
+
+  /* ---------- 00 hero panel ----------
+     Shows what was published at /announcementadmins, or content.js if nothing
+     has been (or Supabase can't be reached). Plain fetch: the homepage doesn't
+     need the Supabase library just to read one public row. */
+  async function liveAnnouncement() {
+    const { supabaseUrl: url, supabaseAnonKey: key } = window.LF_CONFIG || {};
+    if (!url || !key || /YOUR-/.test(url + key)) return null;
+    const res = await fetch(`${url}/rest/v1/hero_announcement?select=title,description,image_path&id=eq.1`, { headers: { apikey: key }, signal: AbortSignal.timeout(3000) });
+    const [row] = res.ok ? await res.json() : [];
+    return row ? { image: `${url}/storage/v1/object/public/announcements/${encodeURIComponent(row.image_path)}`, alt: row.title, subheading: row.title, description: row.description } : null;
+  }
+  async function renderBoard(C) {
+    const box = (await liveAnnouncement().catch(() => null)) || C.heroBox;
+    const board = $('.hero__board');
+    board.insertAdjacentHTML('afterbegin', SC.media(box.image, { cls: 'hero__media', alt: box.alt, eager: true }));
+    splitChars($('.hero__sub'), box.subheading);
+    $('.hero__sub').setAttribute('aria-label', box.subheading);
+    $('.hero__desc').textContent = box.description;
+    void board.offsetWidth;   // lay the hidden letters out first, so the reveal below animates
+    board.classList.add('is-ready');
+  }
 
   /* ---------- 02 community interaction ---------- */
   function initCommunity() {

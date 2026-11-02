@@ -8,7 +8,7 @@ It is a static site: plain HTML, CSS and JavaScript, with no build step and noth
 - **Quick look:** double-click `index.html`.
 - **Publish:** upload the whole folder to any static host (GitHub Pages, Netlify, Vercel, or the school web server).
 
-It needs an internet connection for two things: the fonts (Google Fonts: Archivo + JetBrains Mono) and smooth scrolling (Lenis, from jsDelivr). If Lenis can't load, the site falls back to normal scrolling.
+It needs an internet connection for two things: the fonts (Google Fonts: Urbanist for headings, Poppins for everything else, matching mentarischool.com) and smooth scrolling (Lenis, from jsDelivr). If Lenis can't load, the site falls back to normal scrolling.
 
 ## Update the content (no design skills needed)
 
@@ -22,7 +22,7 @@ It needs an internet connection for two things: the fonts (Google Fonts: Archivo
 | President, VP, Secretary, Treasurer | `leadership` |
 | Departments: description, mission, head, members, stats, photos | `departments` |
 | Projects and their filter categories | `projects`, `projectFilters` |
-| Events (dates switch between UPCOMING and MEMORY on their own) | `events` |
+| Events and announcements panel in the hero | Post it at `/announcementadmins` (see below). `heroBox` is only the fallback |
 | The big impact numbers | `impact` |
 | Submit an idea / Give feedback / Start something links | `voice` |
 | Milestones on the final line | `milestones` |
@@ -81,6 +81,16 @@ Students see `lost-found.html`: a grid of photos and nothing else. It only opens
 4. When someone collects an item, press **Returned · remove**.
 
 Descriptions and dates are only visible to admins. Students only see the photo. Photos are shrunk and their hidden location data is removed before upload. The old `librarian.html` address now forwards to the admin page.
+
+## Announcements
+
+The Events & Announcements panel in the hero is managed at **`/announcementadmins`**, with no code. There is one announcement at a time, and publishing replaces it.
+
+**One-time setup:** after the Lost & Found setup above, open **SQL Editor → New query** in Supabase, paste in `supabase/announcement-setup.sql` and press **Run**. It's safe to run again. Then go to **Authentication → URL Configuration** and add the page to **Redirect URLs**, such as `https://stuco.example.com/announcementadmins/`, or Google sign-in can't return to it.
+
+**To post:** go to `/announcementadmins`, press **Sign in with Google**, choose a photo, write a title and description, and press **Publish**. To fix a typo, change the text and publish again: the photo stays unless you choose a new one.
+
+Only Google accounts listed in the `lf_librarians` table can post. To add someone, use **Table Editor → lf_librarians** and type their email in lowercase. Re-running `lost-found-setup.sql` removes everyone except `students_council@mis.sch.id`, so delete its last line first if you've added people. If nothing has been published, or Supabase can't be reached, the homepage shows `heroBox` from `content.js` instead.
 
 ## The game: Be The Mentarian
 

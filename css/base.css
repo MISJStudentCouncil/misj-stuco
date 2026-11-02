@@ -20,8 +20,8 @@
   --faint: rgba(255, 255, 255, .16);
   --hair: rgba(255, 255, 255, .1);
 
-  --f-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
-  --f-label: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --f-display: "Urbanist", "Helvetica Neue", Arial, sans-serif;
+  --f-label: "Poppins", "Helvetica Neue", Arial, sans-serif;
 
   --gutter: clamp(16px, 4.4vw, 60.8px);
   --ease: cubic-bezier(.16, 1, .3, 1);
@@ -36,8 +36,7 @@ body {
   margin: 0;
   color: var(--white);
   background: var(--navy-950);
-  font-family: var(--f-display);
-  font-stretch: 100%;
+  font-family: var(--f-label);
   font-size: clamp(12.8px, .82vw, 15.2px);
   line-height: 1.5;
   overflow-x: clip;
@@ -101,11 +100,10 @@ html.lenis, html.lenis body { height: auto; }
 /* ---------- typography ---------- */
 .display {
   font-family: var(--f-display);
-  font-weight: 800;
-  font-stretch: 112%;
-  text-transform: uppercase;
-  letter-spacing: -.038em;
-  line-height: .88;
+  font-weight: 700;
+
+  letter-spacing: -.02em;
+  line-height: 1.05;
   font-size: clamp(2.6rem, 6.56vw, 9.5rem);
 }
 .display--xl { font-size: clamp(3rem, 9.92vw, 15.5rem); line-height: .84; }
@@ -122,7 +120,6 @@ html.lenis, html.lenis body { height: auto; }
   font-family: var(--f-label);
   font-size: .72rem;
   font-weight: 600;
-  font-stretch: 112%;
   font-variant-numeric: tabular-nums;
   letter-spacing: .16em;
   text-transform: uppercase;
@@ -130,7 +127,7 @@ html.lenis, html.lenis body { height: auto; }
 }
 .label {
   display: flex; align-items: center; gap: .9em;
-  font-family: var(--f-label); font-size: .74rem; font-weight: 600; font-stretch: 112%; font-variant-numeric: tabular-nums;
+  font-family: var(--f-label); font-size: .74rem; font-weight: 600; font-variant-numeric: tabular-nums;
   letter-spacing: .18em; text-transform: uppercase;
   color: var(--yellow);
   margin-bottom: clamp(1.4rem, 3vw, 2.8rem);
@@ -197,7 +194,7 @@ html.lenis, html.lenis body { height: auto; }
 }
 .ph__mark {
   position: absolute; left: 5%; bottom: -.08em;
-  font-weight: 900; font-stretch: 125%; text-transform: uppercase; letter-spacing: -.05em; line-height: .8;
+  font-family: var(--f-display); font-weight: 700; letter-spacing: -.02em; line-height: 1.05;
   font-size: 34cqw; color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, .24);
   white-space: nowrap;
 }
@@ -279,8 +276,8 @@ body:is(.ink-dark, .ink-flood):not(.menu-open) .nav__title { color: var(--ink); 
 .menu.open .menu__dot { transform: scale(1); }
 .menu__mask { display: block; overflow: hidden; padding: .04em 0; }
 .menu__txt {
-  display: block; font-weight: 800; font-stretch: 116%; text-transform: uppercase;
-  letter-spacing: -.035em; line-height: .95; font-size: clamp(2.2rem, 4.48vh + 1.28vw, 6rem);
+  display: block; font-family: var(--f-display); font-weight: 700;
+  letter-spacing: -.02em; line-height: 1.05; font-size: clamp(2.2rem, 4.48vh + 1.28vw, 6rem);
   transform: translate3d(0, 110%, 0);
   transition: transform 1s var(--ease), letter-spacing .6s var(--ease);
   transition-delay: calc(.22s + var(--i) * .06s), 0s;
@@ -296,7 +293,7 @@ body:is(.ink-dark, .ink-flood):not(.menu-open) .nav__title { color: var(--ink); 
 .menu__aside { opacity: 0; transform: translateY(16px); transition: opacity .8s .55s, transform .8s var(--ease) .55s; max-width: 336px; }
 .menu.open .menu__aside { opacity: 1; transform: none; }
 .menu__aside-label { color: var(--yellow); margin-bottom: 1.2rem; }
-.menu__aside-big { font-weight: 800; font-stretch: 112%; text-transform: uppercase; letter-spacing: -.03em; line-height: .95; font-size: clamp(1.8rem, 2.08vw, 3rem); margin-bottom: 2rem; }
+.menu__aside-big { font-family: var(--f-display); font-weight: 700; letter-spacing: -.02em; line-height: 1.05; font-size: clamp(1.8rem, 2.08vw, 3rem); margin-bottom: 2rem; }
 .menu__contact { display: grid; gap: .6rem; color: var(--mist); }
 .menu__contact a:hover { color: var(--yellow); }
 
@@ -334,13 +331,13 @@ body.ink-dark .cursor.is-btn .cursor__ring { border-color: var(--ink); }
   .menu__inner { grid-template-columns: 1fr; align-items: start; gap: 38.4px; }
   .menu__nav { padding-left: 25.6px; }
   .menu__dot { left: -25.6px; }
-  .menu__txt { font-size: min(7.52vw, 3.4rem); font-stretch: 100%; }
+  .menu__txt { font-size: min(7.52vw, 3.4rem); }
   .menu__nav, .menu__aside { min-width: 0; max-width: 100%; }
   .menu__aside-big { font-size: clamp(1.5rem, 5.6vw, 2.2rem); }
 }
 
-/* small uppercase labels set with the font shorthand: same width + numerals as .micro */
-[class*="__idx"], [class*="__num"], .skip, .btn, .nav__menu, .tag, .pf, .cursor__label { font-stretch: 112%; font-variant-numeric: tabular-nums; }
+/* small uppercase labels set with the font shorthand: same numerals as .micro */
+[class*="__idx"], [class*="__num"], .skip, .btn, .nav__menu, .tag, .pf, .cursor__label { font-variant-numeric: tabular-nums; }
 
 /* ---------- FLOATING LOST & FOUND BUTTON ---------- */
 .lf-fab {

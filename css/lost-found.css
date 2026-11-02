@@ -55,7 +55,7 @@
 }
 .lf-card::after { content: ""; position: absolute; right: 18px; bottom: 18px; width: 16px; height: 16px; border-right: 1.5px solid var(--yellow); border-bottom: 1.5px solid var(--yellow); }
 .lf-card .label { margin-bottom: 1.2rem; }
-.lf-card__title { font-weight: 800; font-stretch: 112%; text-transform: uppercase; letter-spacing: -.03em; line-height: .95; font-size: clamp(1.8rem, 3.2vw, 3rem); margin-bottom: 1rem; }
+.lf-card__title { font-family: var(--f-display); font-weight: 700; letter-spacing: -.02em; line-height: 1.05; font-size: clamp(1.8rem, 3.2vw, 3rem); margin-bottom: 1rem; }
 .lf-card__text { color: var(--mist); max-width: 44ch; margin-bottom: 1.8rem; font-size: 1.05rem; }
 .lf-card__text b { color: var(--white); font-weight: 600; }
 .lf-card code { font-family: var(--f-label); font-size: .85em; color: var(--yellow); }
@@ -71,7 +71,7 @@
 .lf-form label { color: var(--mist); }
 .lf-form__row { display: flex; flex-wrap: wrap; gap: 10px; }
 .lf-input, .lf-form input {
-  flex: 1 1 240px; min-width: 0; font: 500 1rem/1.2 var(--f-display); color: var(--white);
+  flex: 1 1 240px; min-width: 0; font: 500 1rem/1.2 var(--f-label); color: var(--white);
   padding: 1.05em 1.4em; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .3);
   background: rgba(3, 10, 34, .5); transition: border-color .3s, box-shadow .3s;
 }
@@ -101,7 +101,7 @@
 .lf-item__btn:hover::after, .lf-item__btn:focus-visible::after { border-color: var(--yellow); box-shadow: inset 0 0 0 1px var(--yellow), 0 0 30px var(--yellow-glow); }
 .lf-item__btn:focus-visible { outline: none; }
 .lf-empty { grid-column: 1 / -1; padding: clamp(48px, 10vh, 110px) 0; text-align: center; color: var(--mist); }
-.lf-empty__big { display: block; margin-bottom: .6rem; font-weight: 800; font-stretch: 112%; text-transform: uppercase; letter-spacing: -.03em; font-size: clamp(1.6rem, 3vw, 2.6rem); color: var(--white); }
+.lf-empty__big { display: block; margin-bottom: .6rem; font-family: var(--f-display); font-weight: 700; letter-spacing: -.02em; font-size: clamp(1.6rem, 3vw, 2.6rem); color: var(--white); }
 
 /* lightbox */
 .lf-box { width: 100vw; height: 100vh; height: 100svh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: rgba(3, 10, 34, .94); color: var(--white); }
@@ -118,7 +118,7 @@
 /* ---------- librarian desk ---------- */
 .lf-desk { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 4vw, 64px); align-items: start; }
 .lf-up { padding: clamp(22px, 3vw, 36px); border: 1px solid var(--faint); border-radius: 24px; background: linear-gradient(160deg, rgba(26, 71, 214, .22), rgba(5, 15, 51, .55) 60%); position: sticky; top: 100px; }
-.lf-up h2, .lf-desk__list h2 { font-weight: 800; font-stretch: 112%; text-transform: uppercase; letter-spacing: -.03em; line-height: .95; font-size: clamp(1.5rem, 2.2vw, 2.2rem); margin-bottom: 1.2rem; }
+.lf-up h2, .lf-desk__list h2 { font-family: var(--f-display); font-weight: 700; letter-spacing: -.02em; line-height: 1.05; font-size: clamp(1.5rem, 2.2vw, 2.2rem); margin-bottom: 1.2rem; }
 .lf-step { display: block; color: var(--mist); margin: 1.4rem 0 .6rem; }
 .lf-step b { color: var(--yellow); font-weight: 500; margin-right: .6em; }
 .lf-drop {
@@ -130,13 +130,13 @@
 .lf-drop input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
 .lf-drop__hint { display: grid; gap: .5rem; justify-items: center; pointer-events: none; }
 .lf-drop__plus { width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; background: var(--yellow); color: var(--navy-950); font-size: 1.8rem; font-weight: 700; box-shadow: 0 0 30px var(--yellow-glow); }
-.lf-drop__hint strong { font-weight: 700; font-stretch: 110%; text-transform: uppercase; font-size: 1.05rem; }
+.lf-drop__hint strong { font-family: var(--f-display); font-weight: 700; font-size: 1.05rem; }
 .lf-drop__hint span { color: var(--mist); }
 .lf-drop__preview { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: none; pointer-events: none; }
 .lf-drop.has-photo .lf-drop__preview { display: block; }
 .lf-drop.has-photo .lf-drop__hint { opacity: 0; }
 .lf-up textarea, .lf-row__desc {
-  width: 100%; resize: vertical; font: 400 1rem/1.45 var(--f-display); color: var(--white);
+  width: 100%; resize: vertical; font: 400 1rem/1.45 var(--f-label); color: var(--white);
   padding: .9em 1.1em; border-radius: 14px; border: 1px solid rgba(255, 255, 255, .25); background: rgba(3, 10, 34, .5);
 }
 .lf-up textarea:focus, .lf-row__desc:focus { outline: none; border-color: var(--yellow); box-shadow: 0 0 0 4px rgba(255, 210, 31, .15); }
@@ -177,10 +177,16 @@
 
 /* date fields (admin) */
 .lf-date, .lf-row__when {
-  color-scheme: dark; font: 500 1rem/1.2 var(--f-display); color: var(--white);
+  color-scheme: dark; font: 500 1rem/1.2 var(--f-label); color: var(--white);
   padding: .8em 1.1em; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .25); background: rgba(3, 10, 34, .5);
 }
 .lf-date { width: 100%; }
 .lf-row__when { margin-left: .8em; padding: .45em .9em; font-size: .9rem; letter-spacing: 0; text-transform: none; }
 .lf-date:focus, .lf-row__when:focus { outline: none; border-color: var(--yellow); box-shadow: 0 0 0 4px rgba(255, 210, 31, .15); }
 .lf-row__date { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 0; }
+
+/* announcement admin */
+.an-form { position: static; max-width: 680px; }
+.an-form .lf-step:first-child { margin-top: 0; }
+.an-form .lf-input { display: block; width: 100%; }
+.an-form .lf-input::placeholder, .an-form textarea::placeholder { color: rgba(255, 255, 255, .35); }

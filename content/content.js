@@ -239,6 +239,18 @@ window.STUCO_CONTENT = {
     { title: "StuCo Digital Hub",       department: "technology",     year: 2026, status: "Ongoing",   image: "", description: "The digital home of the journey — the site you are exploring now." }
   ],
 
+  /* ---------- 7. EVENTS & ANNOUNCEMENTS (the tall panel in the hero) ----------
+     Post these at /announcementadmins, no code needed. What you publish there
+     replaces this block, which only shows if nothing has been published yet.
+     image: a tall/portrait photo works best, it fills the panel and is cropped
+     to fit. Leave "" to show the designed placeholder instead.               */
+  heroBox: {   // SAMPLE — replace before launch
+    image: "",
+    alt: "",
+    subheading: "Event or announcement title",
+    description: "A short description of what is happening, when and where. Keep it to two or three sentences."
+  },
+
   /* ---------- 8. IMPACT NUMBERS (CHAPTER 08) ---------- */
   impact: [   // SAMPLE numbers — replace with real ones
     { value: 850, suffix: "+", label: "Students reached" },
@@ -264,7 +276,6 @@ window.STUCO_CONTENT = {
     { label: "Home",        href: "#top" },
     { label: "Departments", href: "#departments" },
     { label: "Team",        href: "#people" },
-    { label: "Lost & Found", href: "lost-found.html" },
     { label: "Contact",     href: "#contact" }
   ]
 };

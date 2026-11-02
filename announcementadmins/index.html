@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Announcement Admin — MISJ StuCo</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#030a22">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Urbanist:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/lost-found.css">
+</head>
+<body class="lf-page">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="atmos" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="nav__logo lf-nav__logo" href="../index.html" aria-label="MISJ Student Council home">
+      <img src="../assets/images/stuco-logo.png" alt="MISJ StuCo logo">
+    </a>
+    <div class="lf-nav__right">
+      <div class="lf-who" hidden></div>
+      <a class="nav__menu lf-back" href="../index.html"><span aria-hidden="true">←</span><span>StuCo</span></a>
+    </div>
+  </header>
+
+  <main id="main" class="lf-main">
+    <div class="wrap">
+      <header class="lf-head">
+        <p class="label"><span class="jp-mark reached"></span>Events &amp; Announcements · Admin</p>
+        <h1 class="display lf-title">Post an<br><em>announcement.</em></h1>
+        <p class="lede">Photo, title, description. Press Publish and it replaces the one on the homepage.</p>
+      </header>
+
+      <section class="lf-card" aria-live="polite">
+        <p class="lf-loading micro">Checking your account…</p>
+      </section>
+
+      <form class="lf-up an-form" novalidate hidden>
+        <span class="lf-step micro"><b>01</b>Photo</span>
+        <label class="lf-drop">
+          <input id="an-file" type="file" accept="image/*" aria-label="Choose a photo for the announcement">
+          <span class="lf-drop__hint">
+            <span class="lf-drop__plus" aria-hidden="true">+</span>
+            <strong>Choose a photo</strong>
+            <span>or drag one here</span>
+          </span>
+          <img class="lf-drop__preview" alt="Preview of the chosen photo">
+        </label>
+        <p class="lf-up__note">It's cropped to fill the panel, so keep the important part near the middle.</p>
+        <label class="lf-step micro" for="an-title"><b>02</b>Title</label>
+        <input id="an-title" class="lf-input" type="text" maxlength="90" placeholder="e.g. Inter-House Futsal Final">
+        <label class="lf-step micro" for="an-desc"><b>03</b>Description</label>
+        <textarea id="an-desc" rows="4" maxlength="260" placeholder="What's happening, when and where. Two or three sentences."></textarea>
+        <button class="btn btn--big lf-up__submit" type="submit"><span>Publish</span><span class="btn__arrow" aria-hidden="true">→</span></button>
+        <p class="lf-up__msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </main>
+
+  <footer class="lf-foot micro">
+    <span>MISJ Student Council · Announcements</span>
+    <a href="../index.html">See the homepage →</a>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="../js/lost-found/config.js"></script>
+  <script src="../js/lost-found/common.js"></script>
+  <script src="../js/announcement/admin.js"></script>
+</body>
+</html>

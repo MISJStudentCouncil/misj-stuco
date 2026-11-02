@@ -53,22 +53,6 @@
   ['dragleave', 'drop'].forEach((t) => drop.addEventListener(t, (e) => { e.preventDefault(); drop.classList.remove('is-over'); }));
   drop.addEventListener('drop', (e) => pick(e.dataTransfer.files[0]));
 
-  /* shrink big phone photos and drop their hidden location data */
-  function toJpeg(f, max = 1600) {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.onload = () => {
-        const s = Math.min(1, max / Math.max(img.naturalWidth, img.naturalHeight));
-        const c = document.createElement('canvas');
-        c.width = Math.round(img.naturalWidth * s); c.height = Math.round(img.naturalHeight * s);
-        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-        c.toBlob((b) => (b ? resolve(b) : reject(new Error('convert'))), 'image/jpeg', 0.85);
-      };
-      img.onerror = () => reject(new Error('read'));
-      img.src = URL.createObjectURL(f);
-    });
-  }
-
   /* ---------- add an item ---------- */
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -79,7 +63,7 @@
     const path = `${crypto.randomUUID()}.jpg`;
     try {
       let blob;
-      try { blob = await toJpeg(picked); } catch (err) { throw new Error("This photo format can't be read. Please use a JPG or PNG."); }
+      try { blob = await LF.toJpeg(picked); } catch (err) { throw new Error("This photo format can't be read. Please use a JPG or PNG."); }
       const up = await LF.db.storage.from(LF.BUCKET).upload(path, blob, { contentType: 'image/jpeg' });
       if (up.error) throw up.error;
       const ins = await LF.db.from('lost_items').insert({ image_path: path }).select('id').single();

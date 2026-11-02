@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MISJ StuCo — The Journey</title>
-  <meta name="description" content="The Journey of MISJ StuCo — the Student Council of Mentari Intercultural School Jakarta. Students have ideas. StuCo gives them direction.">
+  <meta name="description" content="The Student Council of Mentari Intercultural School Jakarta. Students have ideas. StuCo gives them direction.">
   <meta name="theme-color" content="#030a22">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Urbanist:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/chapters.css">
   <link rel="stylesheet" href="css/story.css">
@@ -23,12 +23,7 @@
   <a class="skip" href="#main">Skip to content</a>
   <div class="atmos" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
-
-  <!-- Custom cursor (desktop only) -->
-  <div class="cursor" aria-hidden="true">
-    <div class="cursor__ring"><span class="cursor__label"></span></div>
-    <div class="cursor__dot"></div>
-  </div>
+  
 
 
   <!-- Floating navigation -->
@@ -86,14 +81,20 @@
         <span class="hero__dot" aria-hidden="true"></span>
         <div class="hero__center">
           <span class="hero__badge"><img class="hero__logo" src="assets/misj-logo.webp" alt="MISJ school logo" onerror="this.style.display='none'"><img class="hero__logo" src="assets/images/stuco-logo.png" alt="MISJ StuCo logo" onerror="this.style.display='none'"></span>
-          <h1 class="hero__title" aria-label="StuCo — MISJ Student Council">Student Council</h1>
+          <h1 class="hero__title" aria-label="StuCo — MISJ Student Council">STUDENT COUNCIL</h1>
           <p class="hero__school micro">Mentari Intercultural School Jakarta</p>
           <p class="hero__start">Here to serve you</p>
           <div class="hero__actions">
-            <a class="btn btn--big hero__lf" href="lost-found.html" data-cursor="button"><span class="hero__lf-icon" aria-hidden="true">?</span><span>Lost &amp; Found</span><span class="btn__arrow" aria-hidden="true">→</span></a>
             <a class="btn btn--big hero__lf" href="#people" data-cursor="button"><span class="hero__lf-icon" aria-hidden="true">↓</span><span>Explore</span><span class="btn__arrow" aria-hidden="true">→</span></a>
           </div>
         </div>
+        <section class="hero__board" aria-labelledby="board-title">
+          <div class="hero__copy">
+            <h2 class="label hero__label" id="board-title">Events &amp; Announcements</h2>
+            <h3 class="hero__sub"></h3>
+            <p class="hero__desc"></p>
+          </div>
+        </section>
         <a class="hero__scroll micro" href="#people" data-cursor="button">
           <span>Scroll to begin</span><span class="hero__arrow" aria-hidden="true"></span>
         </a>
@@ -104,7 +105,7 @@
     <section id="people" class="chap people" data-bg="#071a5c" data-chapter="03" data-title="The People" data-jp="0.5,0.02 0.035,0.16 0.035,0.97">
       <div class="wrap">
         <p class="label"><span class="jp-mark"></span></p>
-        <h2 class="display display--l" data-split>A journey is never walked alone.</h2>
+        <h2 class="display display--l" data-split>A JOURNEY IS NEVR WALKED ALONE.</h2>
       </div>
       <div class="crew wrap">
         <div class="crew__spot" aria-live="polite"></div>
@@ -124,7 +125,7 @@
     <section id="departments" class="chap depts" data-bg="#040f3a" data-chapter="04" data-title="The Teams" data-jp="0.035,0.01 0.62,0.1 0.5,0.995">
       <div class="wrap depts__intro">
         <p class="label"><span class="jp-mark"></span></p>
-        <h2 class="display display--xl depts__count" data-split>12 Departments.</h2>
+        <h2 class="display display--xl depts__count" data-split>11 Departments.</h2>
         <p class="display display--l depts__one" data-split>One journey.</p>
       </div>
       <div class="net" role="group" aria-label="StuCo department network">
@@ -137,16 +138,6 @@
         <ul class="net__nodes"></ul>
       </div>
       <ol class="dlist wrap" aria-label="Departments"></ol>
-    </section>
-
-    <!-- 05 — FIND YOUR LOST ITEMS -->
-    <section id="lostfound" class="chap lfsec" data-bg="#071a5c" data-chapter="05" data-title="Lost &amp; Found">
-      <div class="wrap lfsec__inner">
-        <p class="label"><span class="jp-mark"></span></p>
-        <h2 class="display display--l" data-split>Find your lost items.</h2>
-        <p class="lfsec__lead">Misplaced something at school? Browse everything that has been handed in to the student lost and found.</p>
-        <a class="btn btn--big" href="lost-found.html" data-cursor="button"><span>Search lost &amp; found</span><span class="btn__arrow" aria-hidden="true">→</span></a>
-      </div>
     </section>
   </main>
 
@@ -186,10 +177,9 @@
     </div>
   </div>
 
-  <a class="lf-fab" href="lost-found.html" data-cursor="button"><span class="lf-fab__icon" aria-hidden="true">?</span><span class="lf-fab__text">Lost something? <strong>Check our lost and found!</strong></span></a>
-
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
   <script src="content/content.js" defer></script>
+  <script src="js/lost-found/config.js" defer></script>
   <script src="js/core.js" defer></script>
   <script src="js/motifs.js" defer></script>
   <script src="js/render.js" defer></script>
