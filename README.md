@@ -84,11 +84,15 @@ Descriptions and dates are only visible to admins. Students only see the photo. 
 
 ## Announcements
 
-The Events & Announcements panel in the hero is managed at **`/announcementadmins`**, with no code. There is one announcement at a time, and publishing replaces it.
+The Events & Announcements panel in the hero is a slideshow managed at **`/announcementadmins`**, with no code. Each announcement is one slide, newest first, up to 10 at a time.
 
 **One-time setup:** after the Lost & Found setup above, open **SQL Editor → New query** in Supabase, paste in `supabase/announcement-setup.sql` and press **Run**. It's safe to run again. Then go to **Authentication → URL Configuration** and add the page to **Redirect URLs**, such as `https://stuco.example.com/announcementadmins/`, or Google sign-in can't return to it.
 
-**To post:** go to `/announcementadmins`, press **Sign in with Google**, choose a photo, write a title and description, and press **Publish**. To fix a typo, change the text and publish again: the photo stays unless you choose a new one.
+**To post:** go to `/announcementadmins`, press **Sign in with Google**, choose a photo, write a title and description, and press **Publish**. Only images are accepted, and every photo is compressed before upload.
+
+**Changing what's live:** **On the homepage** lists everything visitors can see right now, with **Edit**, **Replace photo**, **Archive now** and **Delete** on each slide. While signed in on the same browser, you'll also see an **Edit** button on the slides on the homepage itself, which opens that announcement here.
+
+**Ending an announcement:** set **Remove from homepage on** and Supabase stops showing it at that time, with nothing else to run. It then appears under **Archived**, your history. **Archive now** does the same straight away, **Put back** returns one to the homepage with no end date, and **Delete forever** removes it and its photo for good.
 
 Only Google accounts listed in the `lf_librarians` table can post. To add someone, use **Table Editor → lf_librarians** and type their email in lowercase. Re-running `lost-found-setup.sql` removes everyone except `students_council@mis.sch.id`, so delete its last line first if you've added people. If nothing has been published, or Supabase can't be reached, the homepage shows `heroBox` from `content.js` instead.
 

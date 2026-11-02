@@ -6,6 +6,7 @@
   'use strict';
   const SC = window.SC, $ = SC.$, $$ = SC.$$, esc = SC.esc, pad = SC.pad;
   const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const SLIDES_MAX = 10, SLIDE_MS = 7000;   // hero panel: most slides shown, time on each
 
   const ICONS = {
     instagram: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zm5.3-3.9a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2z"/></svg>',
@@ -18,9 +19,9 @@
   const parseDate = (s) => { const [y, m, d] = String(s).split('-').map(Number); return new Date(y, (m || 1) - 1, d || 1); };
   const isExternal = (u) => /^https?:/i.test(u);
   /* letter-by-letter reveal: letters stay inside their word so long lines still wrap between words */
-  const splitChars = (el, text) => {
+  const splitChars = (text) => {
     let i = 0;
-    el.innerHTML = text.trim().split(/\s+/).map((word) =>
+    return text.trim().split(/\s+/).map((word) =>
       `<span class="ch-word">${Array.from(word).map((ch) => `<span class="ch" aria-hidden="true" style="--i:${i++}">${esc(ch)}</span>`).join('')}</span>`).join(' ');
   };
 
@@ -37,7 +38,7 @@
     $$('.js-term').forEach((el) => (el.textContent = C.site.term || ''));
     $$('.js-year').forEach((el) => (el.textContent = new Date().getFullYear()));
     const title = $('.hero__title');
-    splitChars(title, title.textContent);
+    title.innerHTML = splitChars(title.textContent);
 
     /* menu + footer navigation */
     $('.menu__list').innerHTML = C.menu.map((m, i) =>
@@ -66,24 +67,69 @@
 
   /* ---------- 00 hero panel ----------
      Shows what was published at /announcementadmins, or content.js if nothing
-     has been (or Supabase can't be reached). Plain fetch: the homepage doesn't
-     need the Supabase library just to read one public row. */
-  async function liveAnnouncement() {
+     has been (or Supabase can't be reached). Supabase itself leaves out anything
+     past its end date. Plain fetch: the homepage doesn't need the Supabase
+     library just to read a few public rows. */
+  async function liveAnnouncements() {
     const { supabaseUrl: url, supabaseAnonKey: key } = window.LF_CONFIG || {};
-    if (!url || !key || /YOUR-/.test(url + key)) return null;
-    const res = await fetch(`${url}/rest/v1/hero_announcement?select=title,description,image_path&id=eq.1`, { headers: { apikey: key }, signal: AbortSignal.timeout(3000) });
-    const [row] = res.ok ? await res.json() : [];
-    return row ? { image: `${url}/storage/v1/object/public/announcements/${encodeURIComponent(row.image_path)}`, alt: row.title, subheading: row.title, description: row.description } : null;
+    if (!url || !key || /YOUR-/.test(url + key)) return [];
+    const res = await fetch(`${url}/rest/v1/announcements?select=id,title,description,image_path&order=created_at.desc&limit=${SLIDES_MAX}`, { headers: { apikey: key }, signal: AbortSignal.timeout(3000) });
+    const rows = res.ok ? await res.json() : [];
+    return rows.map((r) => ({ id: r.id, image: `${url}/storage/v1/object/public/announcements/${encodeURIComponent(r.image_path)}`, alt: r.title, subheading: r.title, description: r.description }));
+  }
+  /* Someone signed in on this browser gets an Edit shortcut on each slide. It only
+     decides whether to show a link: the admin page and Supabase check the account. */
+  function signedIn() {
+    try { return Object.keys(localStorage).some((k) => /^sb-.+-auth-token$/.test(k)); } catch (e) { return false; }
   }
   async function renderBoard(C) {
-    const box = (await liveAnnouncement().catch(() => null)) || C.heroBox;
-    const board = $('.hero__board');
-    board.insertAdjacentHTML('afterbegin', SC.media(box.image, { cls: 'hero__media', alt: box.alt, eager: true }));
-    splitChars($('.hero__sub'), box.subheading);
-    $('.hero__sub').setAttribute('aria-label', box.subheading);
-    $('.hero__desc').textContent = box.description;
+    const live = await liveAnnouncements().catch(() => []);
+    const list = live.length ? live : [C.heroBox];
+    const board = $('.hero__board'), admin = signedIn();
+    $('.hero__slides').innerHTML = list.map((b, i) => `<article class="hero__slide${i ? '' : ' is-on'}" aria-roledescription="slide" aria-label="${i + 1} of ${list.length}">
+      ${admin ? `<a class="hero__edit micro" href="announcementadmins/${b.id ? `?edit=${encodeURIComponent(b.id)}` : ''}" data-cursor="button">Edit</a>` : ''}
+      ${SC.media(b.image, { cls: 'hero__media', alt: b.alt, eager: true })}
+      <div class="hero__copy">
+        <p class="label hero__label">Events &amp; Announcements</p>
+        <h2 class="hero__sub" aria-label="${esc(b.subheading)}">${splitChars(b.subheading)}</h2>
+        <p class="hero__desc">${esc(b.description)}</p>
+      </div>
+    </article>`).join('');
+    const ig = C.socials.find((s) => s.icon === 'instagram');
+    if (ig) $('.hero__contact').innerHTML = `Contact us through IG: <a href="${esc(ig.url)}" target="_blank" rel="noopener" data-cursor="button">@${esc(ig.url.replace(/\/+$/, '').split('/').pop())}</a>`;
+    initSlides(board, list.length);
     void board.offsetWidth;   // lay the hidden letters out first, so the reveal below animates
     board.classList.add('is-ready');
+  }
+  /* arrows, dots, swipe and autoplay. Stops while someone is hovering or tabbing through it. */
+  function initSlides(board, n) {
+    if (n < 2) return;
+    const slides = $$('.hero__slide', board), [prev, next] = $$('.hero__step', board), pips = $('.hero__pips', board);
+    let cur = 0, timer, touchX = null;
+    $('.hero__nav', board).hidden = false;
+    pips.innerHTML = slides.map((s, i) => `<button class="hero__pip" type="button" aria-label="Go to announcement ${i + 1}" aria-current="${!i}" data-cursor="button"></button>`).join('');
+    const dots = $$('.hero__pip', pips);
+    const go = (i) => {
+      cur = (i + n) % n;
+      slides.forEach((s, k) => s.classList.toggle('is-on', k === cur));
+      dots.forEach((d, k) => d.setAttribute('aria-current', String(k === cur)));
+    };
+    const stop = () => clearInterval(timer);
+    const play = () => { stop(); if (!SC.reduce) timer = setInterval(() => go(cur + 1), SLIDE_MS); };
+    prev.addEventListener('click', () => go(cur - 1));
+    next.addEventListener('click', () => go(cur + 1));
+    dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
+    board.addEventListener('pointerenter', stop);
+    board.addEventListener('pointerleave', play);
+    board.addEventListener('focusin', stop);
+    board.addEventListener('focusout', play);
+    board.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+    board.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 40) go(cur + (dx < 0 ? 1 : -1));
+      play();
+    }, { passive: true });
+    play();
   }
 
   /* ---------- 02 community interaction ---------- */

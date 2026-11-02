@@ -32,32 +32,52 @@
       <header class="lf-head">
         <p class="label"><span class="jp-mark reached"></span>Events &amp; Announcements · Admin</p>
         <h1 class="display lf-title">Post an<br><em>announcement.</em></h1>
-        <p class="lede">Photo, title, description. Press Publish and it replaces the one on the homepage.</p>
+        <p class="lede">Each one becomes a slide on the homepage. Set an end date and it moves to Archived by itself.</p>
       </header>
 
       <section class="lf-card" aria-live="polite">
         <p class="lf-loading micro">Checking your account…</p>
       </section>
 
-      <form class="lf-up an-form" novalidate hidden>
-        <span class="lf-step micro"><b>01</b>Photo</span>
-        <label class="lf-drop">
-          <input id="an-file" type="file" accept="image/*" aria-label="Choose a photo for the announcement">
-          <span class="lf-drop__hint">
-            <span class="lf-drop__plus" aria-hidden="true">+</span>
-            <strong>Choose a photo</strong>
-            <span>or drag one here</span>
-          </span>
-          <img class="lf-drop__preview" alt="Preview of the chosen photo">
-        </label>
-        <p class="lf-up__note">It's cropped to fill the panel, so keep the important part near the middle.</p>
-        <label class="lf-step micro" for="an-title"><b>02</b>Title</label>
-        <input id="an-title" class="lf-input" type="text" maxlength="90" placeholder="e.g. Inter-House Futsal Final">
-        <label class="lf-step micro" for="an-desc"><b>03</b>Description</label>
-        <textarea id="an-desc" rows="4" maxlength="260" placeholder="What's happening, when and where. Two or three sentences."></textarea>
-        <button class="btn btn--big lf-up__submit" type="submit"><span>Publish</span><span class="btn__arrow" aria-hidden="true">→</span></button>
-        <p class="lf-up__msg" role="status" aria-live="polite"></p>
-      </form>
+      <div class="lf-desk" hidden>
+        <form class="lf-up an-form" novalidate>
+          <h2 class="an-form__title">New announcement</h2>
+          <span class="lf-step micro"><b>01</b>Photo</span>
+          <label class="lf-drop">
+            <input id="an-file" type="file" accept="image/*" aria-label="Choose a photo for the announcement">
+            <span class="lf-drop__hint">
+              <span class="lf-drop__plus" aria-hidden="true">+</span>
+              <strong>Choose a photo</strong>
+              <span>or drag one here. Images only, no PDFs.</span>
+            </span>
+            <img class="lf-drop__preview" alt="Preview of the chosen photo">
+          </label>
+          <p class="lf-up__note">Every photo is compressed automatically. It's cropped to fill the slide, so keep the important part near the middle.</p>
+          <label class="lf-step micro" for="an-title"><b>02</b>Title</label>
+          <input id="an-title" class="lf-input" type="text" maxlength="90" placeholder="e.g. Inter-House Futsal Final">
+          <label class="lf-step micro" for="an-desc"><b>03</b>Description</label>
+          <textarea id="an-desc" rows="4" maxlength="260" placeholder="What's happening, when and where. Two or three sentences."></textarea>
+          <label class="lf-step micro" for="an-until"><b>04</b>Remove from homepage on (optional)</label>
+          <input id="an-until" class="lf-date" type="datetime-local">
+          <p class="lf-up__note">At this time it leaves the homepage and moves to Archived. Leave it empty to keep it up until you archive it.</p>
+          <button class="btn btn--big lf-up__submit" type="submit"><span class="an-submit-label">Publish</span><span class="btn__arrow" aria-hidden="true">→</span></button>
+          <button class="btn an-cancel" type="button" hidden>Cancel editing</button>
+          <p class="lf-up__msg" role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="lf-desk__list">
+          <section aria-label="Announcements on the homepage">
+            <h2>On the homepage</h2>
+            <div class="lf-bar"><span class="micro lf-count an-live-count">0 slides</span><span class="lf-bar__note">Live now, newest first. <a class="an-see" href="../index.html" target="_blank" rel="noopener">See it on the homepage →</a></span></div>
+            <ul class="lf-list an-live"></ul>
+          </section>
+          <section class="an-history" aria-label="Archived announcements">
+            <h2>Archived</h2>
+            <div class="lf-bar"><span class="micro lf-count an-past-count">0 archived</span><span class="lf-bar__note">Your history. Visitors can't see these.</span></div>
+            <ul class="lf-list an-past"></ul>
+          </section>
+        </div>
+      </div>
     </div>
   </main>
 

@@ -186,7 +186,19 @@
 .lf-row__date { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 0; }
 
 /* announcement admin */
-.an-form { position: static; max-width: 680px; }
-.an-form .lf-step:first-child { margin-top: 0; }
+.an-form { position: static; scroll-margin-top: 100px; }
 .an-form .lf-input { display: block; width: 100%; }
 .an-form .lf-input::placeholder, .an-form textarea::placeholder { color: rgba(255, 255, 255, .35); }
+.an-cancel { margin-top: .7rem; width: 100%; justify-content: center; }
+.an-history { margin-top: clamp(36px, 6vh, 64px); }
+.an-row__title { font-family: var(--f-display); font-weight: 700; font-size: 1.15rem; line-height: 1.2; }
+.an-row__desc { color: var(--mist); display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.an-row__when { color: var(--yellow); }
+.an-history .lf-row__img img { filter: saturate(.55); }
+.an-see { color: var(--yellow); white-space: nowrap; }
+.an-see:hover { text-decoration: underline; }
+/* live slides get a bigger photo, so admins can see what visitors see */
+@media (min-width: 521px) {
+  .an-live .lf-row { grid-template-columns: 190px 1fr; }
+  .an-live .lf-row__img { aspect-ratio: 4 / 3; }
+}

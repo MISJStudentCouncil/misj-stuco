@@ -22,7 +22,7 @@
     const sec = $('#top'), stage = $('.hero__stage'), svg = $('.hero__line'), path = $('.hero__path'), dot = $('.hero__dot');
     const center = $('.hero__center'), title = $('.hero__title'), school = $('.hero__school'), start = $('.hero__start');
     const scroll = $('.hero__scroll'), metas = $$('.hero__meta'), glow = $('.hero__glow');
-    const board = $('.hero__board'), sub = $('.hero__sub'), desc = $('.hero__desc');
+    const board = $('.hero__board');
     let len = 0, introLen = 0, intro = 0, introDone = false, scrollP = 0;
     const tmp = document.createElementNS(NS, 'path');
 
@@ -71,13 +71,17 @@
       const e = E.out(p);
       // the panel follows the same moves as the brand side
       center.style.transform = board.style.transform = `translate3d(0,${-16 * e}vh,0)`;
-      title.style.transform = sub.style.transform = `scale(${1 - 0.46 * e})`;
-      title.style.opacity = sub.style.opacity = String(1 - 0.72 * e);
+      title.style.transform = `scale(${1 - 0.46 * e})`;
+      title.style.opacity = String(1 - 0.72 * e);
       school.style.transform = `translate3d(0,${-4 * e}vh,0)`;
-      desc.style.transform = `translate3d(0,${-2 * e}vh,0)`;   // less travel: the sub heading above it can be several lines
+      // set on the panel so every slide follows, whichever one is showing
+      board.style.setProperty('--sub-scale', String(1 - 0.46 * e));
+      board.style.setProperty('--sub-op', String(1 - 0.72 * e));
+      board.style.setProperty('--desc-y', `${-2 * e}vh`);   // less travel: the sub heading above it can be several lines
+      board.style.setProperty('--desc-op', String(1 - 0.5 * e));
       // at p = 0 leave opacity to CSS so the arrival intro can play
       const fade = p > 0 ? String(1 - range(p, 0, 0.22)) : '';
-      school.style.opacity = desc.style.opacity = p > 0 ? String(1 - 0.5 * e) : '';
+      school.style.opacity = p > 0 ? String(1 - 0.5 * e) : '';
       start.style.opacity = fade;
       scroll.style.opacity = fade;
       metas.forEach((m) => (m.style.opacity = fade));

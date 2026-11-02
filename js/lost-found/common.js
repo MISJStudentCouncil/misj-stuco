@@ -51,15 +51,17 @@
   };
 
   /* shrink big phone photos and drop their hidden location data */
-  LF.toJpeg = function (f, max = 1600) {
+  LF.toJpeg = function (f, max = 1600, quality = 0.85) {
     return new Promise((resolve, reject) => {
       const img = new Image();
       img.onload = () => {
         const s = Math.min(1, max / Math.max(img.naturalWidth, img.naturalHeight));
         const c = document.createElement('canvas');
         c.width = Math.round(img.naturalWidth * s); c.height = Math.round(img.naturalHeight * s);
-        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-        c.toBlob((b) => (b ? resolve(b) : reject(new Error('convert'))), 'image/jpeg', 0.85);
+        const x = c.getContext('2d');
+        x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height);   // JPEG has no transparency: without this, clear areas turn black
+        x.drawImage(img, 0, 0, c.width, c.height);
+        c.toBlob((b) => (b ? resolve(b) : reject(new Error('convert'))), 'image/jpeg', quality);
       };
       img.onerror = () => reject(new Error('read'));
       img.src = URL.createObjectURL(f);

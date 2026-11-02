@@ -240,8 +240,8 @@ window.STUCO_CONTENT = {
   ],
 
   /* ---------- 7. EVENTS & ANNOUNCEMENTS (the tall panel in the hero) ----------
-     Post these at /announcementadmins, no code needed. What you publish there
-     replaces this block, which only shows if nothing has been published yet.
+     Post these at /announcementadmins, no code needed. Each one is a slide.
+     This block only shows if nothing is published, or Supabase can't be reached.
      image: a tall/portrait photo works best, it fills the panel and is cropped
      to fit. Leave "" to show the designed placeholder instead.               */
   heroBox: {   // SAMPLE — replace before launch

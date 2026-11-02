@@ -90,11 +90,15 @@
             <a class="btn btn--big hero__lf" href="#people" data-cursor="button"><span class="hero__lf-icon" aria-hidden="true">↓</span><span>Explore</span><span class="btn__arrow" aria-hidden="true">→</span></a>
           </div>
         </div>
-        <section class="hero__board" aria-labelledby="board-title">
-          <div class="hero__copy">
-            <h2 class="label hero__label" id="board-title">Events &amp; Announcements</h2>
-            <h3 class="hero__sub"></h3>
-            <p class="hero__desc"></p>
+        <section class="hero__board" aria-label="Events and announcements" aria-roledescription="carousel">
+          <div class="hero__slides"></div>
+          <div class="hero__foot">
+            <p class="hero__contact"></p>
+            <div class="hero__nav" hidden>
+              <button class="hero__step" type="button" aria-label="Previous announcement" data-cursor="button">←</button>
+              <div class="hero__pips"></div>
+              <button class="hero__step" type="button" aria-label="Next announcement" data-cursor="button">→</button>
+            </div>
           </div>
         </section>
         <a class="hero__scroll micro" href="#people" data-cursor="button">

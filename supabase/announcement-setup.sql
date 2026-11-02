@@ -1,5 +1,5 @@
 -- ==========================================================================
--- MISJ STUCO — HERO ANNOUNCEMENT · Supabase setup
+-- MISJ STUCO — ANNOUNCEMENTS · Supabase setup
 -- Run this once: Supabase dashboard → SQL Editor → New query → paste → Run.
 -- It is safe to run again.
 --
@@ -7,42 +7,69 @@
 -- anyone who can manage Lost & Found can also post announcements.
 -- ==========================================================================
 
--- 1. The announcement: always one row, each publish replaces it ---------------
+-- 1. Announcements: each one is a slide in the homepage panel ------------------
 
-create table if not exists public.hero_announcement (
-  id int primary key default 1 check (id = 1),
+create table if not exists public.announcements (
+  id uuid primary key default gen_random_uuid(),
   title text not null check (char_length(title) between 1 and 120),
   description text not null check (char_length(description) between 1 and 600),
   image_path text not null,
-  updated_at timestamptz not null default now()
+  expires_at timestamptz,    -- leaves the homepage at this time; empty = stays up
+  archived_at timestamptz,   -- set when an admin archives it by hand
+  created_at timestamptz not null default now()
 );
 
-alter table public.hero_announcement enable row level security;
+alter table public.announcements enable row level security;
+
+-- Carry over the single announcement from the first version of this page.
+do $$
+begin
+  if to_regclass('public.hero_announcement') is not null
+     and not exists (select 1 from public.announcements) then
+    execute 'insert into public.announcements (title, description, image_path, created_at)
+             select title, description, image_path, updated_at from public.hero_announcement';
+  end if;
+end $$;
 
 -- 2. Table rules ---------------------------------------------------------------
 
--- The homepage is public, so anyone may read it, signed in or not.
-drop policy if exists "hero: anyone can view" on public.hero_announcement;
-create policy "hero: anyone can view" on public.hero_announcement
+-- The homepage is public, but Supabase only hands out what is current. This is
+-- the auto-delete: past its end time a row stops being public by itself, with
+-- no scheduled job, and stays here as the archive history.
+drop policy if exists "announcements: anyone sees current" on public.announcements;
+create policy "announcements: anyone sees current" on public.announcements
   for select to anon, authenticated
-  using (true);
+  using (archived_at is null and (expires_at is null or expires_at > now()));
 
-drop policy if exists "hero: admins add" on public.hero_announcement;
-create policy "hero: admins add" on public.hero_announcement
+drop policy if exists "announcements: admins see all" on public.announcements;
+create policy "announcements: admins see all" on public.announcements
+  for select to authenticated
+  using (public.lf_is_librarian());
+
+drop policy if exists "announcements: admins add" on public.announcements;
+create policy "announcements: admins add" on public.announcements
   for insert to authenticated
   with check (public.lf_is_librarian());
 
-drop policy if exists "hero: admins edit" on public.hero_announcement;
-create policy "hero: admins edit" on public.hero_announcement
+drop policy if exists "announcements: admins edit" on public.announcements;
+create policy "announcements: admins edit" on public.announcements
   for update to authenticated
   using (public.lf_is_librarian())
   with check (public.lf_is_librarian());
 
+drop policy if exists "announcements: admins delete" on public.announcements;
+create policy "announcements: admins delete" on public.announcements
+  for delete to authenticated
+  using (public.lf_is_librarian());
+
 -- 3. Public photo storage (unlike Lost & Found, these are meant to be seen) ----
 
+-- Photos are converted to compressed JPEGs in the admin page, so JPEG is the
+-- only type accepted here: PDFs and other files are refused by Supabase too.
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
-values ('announcements', 'announcements', true, 10485760, array['image/jpeg', 'image/png', 'image/webp'])
-on conflict (id) do update set public = true;
+values ('announcements', 'announcements', true, 2097152, array['image/jpeg'])
+on conflict (id) do update
+  set public = true, file_size_limit = 2097152, allowed_mime_types = array['image/jpeg'];
 
 drop policy if exists "hero photos: anyone can view" on storage.objects;
 create policy "hero photos: anyone can view" on storage.objects
