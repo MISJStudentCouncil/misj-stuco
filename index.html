@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="css/departments.css">
   <link rel="stylesheet" href="css/game.css">
   <script>
+    // Supabase sends a sign-in here if its return page isn't on the allowed list: carry it on to the admin page
+    if (location.hash.startsWith('#access_token=')) location.replace('announcementadmins/' + location.hash);
     document.documentElement.classList.replace('no-js', 'js');
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('reduce');
   </script>
