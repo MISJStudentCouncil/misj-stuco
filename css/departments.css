@@ -76,9 +76,26 @@
 .dl__btn:hover .dl__go { transform: translateX(3.2px); }
 
 @media (max-width: 900px) {
-  .net { display: none; }
+  .net { height: min(100svh, 100vw); min-height: 520px; }
   .dlist { display: block; margin-top: 40px; }
 }
+/* phones: numbered dots round the ring, tap one to see it in the core */
+@media (max-width: 599px) {
+  .net { height: min(124vw, 640px); min-height: 0; }
+  .net__hint { display: none; }
+}
+.net--small .nnode__btn, .net--small .nnode--l .nnode__btn { transform: translate(-50%, -50%); }
+.net--small .nnode__txt { display: none; }
+.net--small .nnode__dot { width: 36px; height: 36px; border-color: rgba(255, 255, 255, .45); }
+.net--small .nnode__dot::after {
+  content: attr(data-n); inset: 0; display: grid; place-items: center; border-radius: 50%; background: none;
+  font: 600 .66rem/1 var(--f-label); color: var(--yellow); font-variant-numeric: tabular-nums;
+}
+.net--small .nnode.is-on .nnode__dot { transform: scale(1.25); border-radius: 50%; }
+.net--small .nnode.is-on .nnode__dot::after { transform: none; color: var(--navy-950); }
+.net--small .net__idle strong { font-size: clamp(2rem, 9vw, 2.6rem); }
+.net--small .ni { gap: .45rem; }
+.net--small .ni__name { font-size: clamp(1rem, 4.4vw, 1.25rem); }
 
 /* ---------- department experience ---------- */
 .dview {

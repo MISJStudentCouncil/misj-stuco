@@ -14,7 +14,7 @@
     const D = SC.C.departments;
     const net = $('.net'), svg = $('.net__lines'), ul = $('.net__nodes'), info = $('.net__info'), canvas = $('.net__motif');
     ul.innerHTML = D.map((d, i) =>
-      `<li class="nnode"><div class="nnode__btn"><span class="nnode__dot" aria-hidden="true"></span><span class="nnode__txt" aria-hidden="true"><span class="nnode__num micro">${pad(i + 1)}</span><span class="nnode__name">${esc(d.short || d.name)}</span></span></div></li>`).join('');
+      `<li class="nnode"><div class="nnode__btn"><span class="nnode__dot" data-n="${pad(i + 1)}" aria-hidden="true"></span><span class="nnode__txt" aria-hidden="true"><span class="nnode__num micro">${pad(i + 1)}</span><span class="nnode__name">${esc(d.short || d.name)}</span></span></div></li>`).join('');
     svg.innerHTML = D.map(() => '<path class="spoke"/>').join('') + '<path class="ring"/>';
     const nodes = $$('.nnode', ul), spokes = $$('.spoke', svg), ring = $('.ring', svg);
     let W = 0, H = 0, cx = 0, cy = 0, r0 = 0, base = [], visible = false, active = -1, motif = null;
@@ -24,11 +24,14 @@
       W = net.clientWidth; H = net.clientHeight;
       if (!W) return;
       cx = W / 2; cy = H / 2;
-      const coreSize = Math.min(W * 0.26, H * 0.42, 360);
+      // phones: no room for names round the ring, so the nodes become numbered dots and the core gets bigger
+      const small = W < 600;
+      const coreSize = small ? W * 0.48 : Math.min(W * 0.26, H * 0.42, 360);
       r0 = coreSize / 2;
       net.style.setProperty('--core', coreSize + 'px');
       net.classList.toggle('net--compact', coreSize < 290);
-      const rx = Math.min(W * 0.4, W / 2 - 175), ry = H * 0.37;
+      net.classList.toggle('net--small', small);
+      const rx = small ? W / 2 - 30 : Math.min(W * 0.4, W / 2 - 175), ry = small ? H / 2 - 30 : H * 0.37;
       base = D.map((_, i) => {
         const a = -Math.PI / 2 + (i / D.length) * Math.PI * 2 + 0.13, j = i % 2 ? 0.05 : -0.05;
         return [cx + Math.cos(a) * rx * (1 + j), cy + Math.sin(a) * ry * (1 - j)];
@@ -70,7 +73,13 @@
       const n = e.target.closest('.nnode');
       activate(n ? nodes.indexOf(n) : -1);
     });
-    net.addEventListener('pointerleave', () => activate(-1));
+    net.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') activate(-1); });
+    // touch: tap a node to show it, tap it again or anywhere else in the diagram to clear
+    ul.addEventListener('pointerup', (e) => {
+      if (e.pointerType === 'mouse') return;
+      const i = nodes.indexOf(e.target.closest('.nnode'));
+      activate(i === active ? -1 : i);
+    });
     ul.addEventListener('focusin', (e) => { const n = e.target.closest('.nnode'); if (n) activate(nodes.indexOf(n)); });
     ul.addEventListener('focusout', (e) => { if (!ul.contains(e.relatedTarget)) activate(-1); });
 

@@ -55,6 +55,13 @@ The `id` also chooses the animated motif. You can reuse an existing id's motif w
 
 Copy a block, paste it, and edit it. For a project, set `department` to a department `id`. Event dates use the format `"YYYY-MM-DD"`.
 
+## Events and Contact pages
+
+The navbar on every page has **Home**, **Events** and **Contact** buttons.
+
+- **`events.html`** lists every announcement that is live right now, newest first and biggest. It reads the same Supabase table as the homepage panel, so there is nothing extra to update: post at `/announcementadmins` and it appears in both places.
+- **`contact.html`** is built from `contact` and `socials` in `content.js`: one card for the email, one per social link, and one for the location, which opens Google Maps.
+
 ## Lost & Found
 
 Students see `lost-found.html`: a grid of photos and nothing else. It only opens for signed-in school email accounts. Admins (the librarian, plus anyone else you add) manage items at **`/lostandfoundadmins`**. That page is `lostandfoundadmins/index.html`. The photos, descriptions and dates live in Supabase, and Supabase does the access checks on its server, so they can't be bypassed from the browser.
@@ -88,7 +95,7 @@ The Events & Announcements panel in the hero is a slideshow managed at **`/annou
 
 **One-time setup:** after the Lost & Found setup above, open **SQL Editor → New query** in Supabase, paste in `supabase/announcement-setup.sql` and press **Run**. It's safe to run again. Then go to **Authentication → URL Configuration** and add the page to **Redirect URLs**, such as `https://stuco.example.com/announcementadmins/`, or Google sign-in can't return to it.
 
-**To post:** go to `/announcementadmins`, press **Sign in with Google**, choose a photo, write a title and description, and press **Publish**. Only images are accepted, and every photo is compressed before upload.
+**To post:** go to `/announcementadmins`, press **Sign in with Google**, choose a photo, write a title and description, and press **Publish**. The photo frame on the admin page is the exact 4:3 shape of the homepage slide: drag the photo to choose what shows and zoom in to crop it (pinch, scroll, the slider, or the arrow and +/- keys). Editing an announcement lets you re-crop its saved photo too. Only images are accepted, and every photo is compressed before upload.
 
 **Changing what's live:** **On the homepage** lists everything visitors can see right now, with **Edit**, **Replace photo**, **Archive now** and **Delete** on each slide. While signed in on the same browser, you'll also see an **Edit** button on the slides on the homepage itself, which opens that announcement here.
 
@@ -113,6 +120,8 @@ Progress is saved in the visitor's browser (localStorage), so players can leave 
 
 ```
 index.html            page structure (chapter headings live here)
+events.html           all live events and announcements
+contact.html          email, socials and location
 content/content.js    ALL editable content
 css/base.css          colours, type, navigation, menu, cursor, journey line
 css/chapters.css      Arrival, The Beginning, The Community, The People
@@ -122,6 +131,9 @@ js/core.js            scrolling engine, reveals, cursor, menu, journey line
 js/render.js          builds every chapter from content.js
 js/scenes.js          scroll choreography
 js/departments.js     network, department pages, project sheet
+js/pages.js           builds events.html and contact.html
+js/icons.js           social and contact icons, shared by every page
+css/pages.css         events and contact pages
 js/motifs.js          the 12 department animations
 assets/               logo and images
 ```

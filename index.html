@@ -34,6 +34,11 @@
       <img class="js-logo" src="assets/misj-logo.webp" alt="Mentari Intercultural School Jakarta logo">
     </a>
     <div class="nav__right">
+      <nav class="nav__links" aria-label="Pages">
+        <a href="#top" aria-current="page" data-cursor="button">Home</a>
+        <a href="events.html" data-cursor="button">Events</a>
+        <a href="contact.html" data-cursor="button">Contact</a>
+      </nav>
       <p class="nav__progress micro" aria-live="polite">
         <span class="nav__num">00</span><span class="nav__sep">/</span><span class="nav__total">09</span>
         <span class="nav__title">Arrival</span>
@@ -90,17 +95,19 @@
             <a class="btn btn--big hero__lf" href="#people" data-cursor="button"><span class="hero__lf-icon" aria-hidden="true">↓</span><span>Explore</span><span class="btn__arrow" aria-hidden="true">→</span></a>
           </div>
         </div>
-        <section class="hero__board" aria-label="Events and announcements" aria-roledescription="carousel">
-          <div class="hero__slides"></div>
-          <div class="hero__foot">
-            <p class="hero__contact"></p>
-            <div class="hero__nav" hidden>
-              <button class="hero__step" type="button" aria-label="Previous announcement" data-cursor="button">←</button>
-              <div class="hero__pips"></div>
-              <button class="hero__step" type="button" aria-label="Next announcement" data-cursor="button">→</button>
+        <div class="hero__side">
+          <section class="hero__board" aria-label="Events and announcements" aria-roledescription="carousel">
+            <div class="hero__slides"></div>
+            <div class="hero__foot">
+              <p class="hero__contact"></p>
+              <div class="hero__nav" hidden>
+                <button class="hero__step" type="button" aria-label="Previous announcement" data-cursor="button">←</button>
+                <div class="hero__pips"></div>
+                <button class="hero__step" type="button" aria-label="Next announcement" data-cursor="button">→</button>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
         <a class="hero__scroll micro" href="#people" data-cursor="button">
           <span>Scroll to begin</span><span class="hero__arrow" aria-hidden="true"></span>
         </a>
@@ -188,6 +195,8 @@
   <script src="js/lost-found/config.js" defer></script>
   <script src="js/core.js" defer></script>
   <script src="js/motifs.js" defer></script>
+  <script src="js/icons.js" defer></script>
+  <script src="js/admin-check.js" defer></script>
   <script src="js/render.js" defer></script>
   <script src="js/scenes.js" defer></script>
   <script src="js/departments.js" defer></script>

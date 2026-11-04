@@ -229,12 +229,25 @@ html.lenis, html.lenis body { height: auto; }
   transition: border-color .4s, background .4s, color .4s;
 }
 .nav__menu:hover { border-color: var(--yellow); }
+/* Home / Events / Contact: one pill in the middle of the bar, the page you're on in yellow */
+.nav__links {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 2px; padding: 4px; border: 1px solid rgba(255, 255, 255, .3); border-radius: 999px;
+  background: rgba(3, 10, 34, .28); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  transition: border-color .4s, background .4s;
+}
+.nav__links a {
+  font: 500 .74rem/1 var(--f-label); letter-spacing: .18em; text-transform: uppercase;
+  padding: calc(1em - 4px) 1.1em; border-radius: 999px; transition: background .3s, color .3s;
+}
+.nav__links a:hover { color: var(--yellow); }
+.nav__links a[aria-current="page"] { background: var(--yellow); color: var(--navy-950); }
 .nav__menu-icon { display: grid; gap: 4px; width: 14.4px; }
 .nav__menu-icon i { display: block; height: 1.5px; background: currentColor; transition: transform .55s var(--ease); }
 .nav__menu[aria-expanded="true"] .nav__menu-icon i:first-child { transform: translateY(2.6px) rotate(45deg); }
 .nav__menu[aria-expanded="true"] .nav__menu-icon i:last-child { transform: translateY(-2.6px) rotate(-45deg); }
 body:is(.ink-dark, .ink-flood):not(.menu-open) .nav { color: var(--ink); }
-body:is(.ink-dark, .ink-flood):not(.menu-open) .nav__menu { border-color: rgba(7, 21, 66, .3); background: rgba(243, 241, 234, .55); }
+body:is(.ink-dark, .ink-flood):not(.menu-open) :is(.nav__menu, .nav__links) { border-color: rgba(7, 21, 66, .3); background: rgba(243, 241, 234, .55); }
 body:is(.ink-dark, .ink-flood):not(.menu-open) .nav__progress { color: rgba(7, 21, 66, .6); }
 body:is(.ink-dark, .ink-flood):not(.menu-open) .nav__num { color: var(--blue-600); }
 body:is(.ink-dark, .ink-flood):not(.menu-open) .nav__title { color: var(--ink); border-color: rgba(7, 21, 66, .2); }
@@ -328,12 +341,19 @@ body.ink-dark .cursor.is-btn .cursor__ring { border-color: var(--ink); }
 /* ---------- small screens ---------- */
 @media (max-width: 760px) {
   .nav__title { display: none; }
+  /* room for the three page buttons: the menu button keeps only its icon */
+  .nav__links a { padding-inline: .8em; letter-spacing: .08em; font-size: .68rem; }
+  .nav__menu { padding-inline: 1em; }
+  .nav__menu-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .menu__inner { grid-template-columns: 1fr; align-items: start; gap: 38.4px; }
   .menu__nav { padding-left: 25.6px; }
   .menu__dot { left: -25.6px; }
   .menu__txt { font-size: min(7.52vw, 3.4rem); }
   .menu__nav, .menu__aside { min-width: 0; max-width: 100%; }
   .menu__aside-big { font-size: clamp(1.5rem, 5.6vw, 2.2rem); }
+}
+@media (max-width: 360px) {
+  .nav__links a { padding-inline: .6em; letter-spacing: .04em; }
 }
 
 /* small uppercase labels set with the font shorthand: same numerals as .micro */

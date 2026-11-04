@@ -274,8 +274,9 @@ window.STUCO_CONTENT = {
   /* ---------- 11. MENU ---------- */
   menu: [
     { label: "Home",        href: "#top" },
+    { label: "Events",      href: "events.html" },
     { label: "Departments", href: "#departments" },
     { label: "Team",        href: "#people" },
-    { label: "Contact",     href: "#contact" }
+    { label: "Contact",     href: "contact.html" }
   ]
 };

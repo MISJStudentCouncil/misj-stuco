@@ -37,7 +37,7 @@
 .hero__title {
   font-family: var(--f-display); font-weight: 700;
   letter-spacing: -.02em; line-height: 1.05; margin-right: -.02em; white-space: nowrap;
-  font-size: min(6vw, 18vh);
+  font-size: min(6vw, 18vh, (100vw - var(--panel) - 3 * var(--gutter)) / 9);   /* always fits beside the panel */
 }
 .hero__title .ch, .hero__sub .ch {
   display: inline-block; white-space: pre; opacity: 0; filter: blur(16px);
@@ -71,10 +71,12 @@
 .hero__lf-icon { display: grid; place-items: center; width: 2em; height: 2em; border-radius: 50%; background: var(--navy-950); color: var(--yellow); font-weight: 800; font-family: var(--f-display); }
 @keyframes lfPulse { 0% { box-shadow: 0 0 0 0 rgba(255, 210, 31, .5), 0 18px 50px -14px var(--yellow-glow); } 70%, 100% { box-shadow: 0 0 0 18px rgba(255, 210, 31, 0), 0 18px 50px -14px var(--yellow-glow); } }
 .reduce .hero__lf { animation: none; }
-/* events + announcements panel: on the page gutter, starting below the menu button. Its width
-   is capped by the screen height, so the 4:3 photo plus the text always fit above the gutter. */
+/* events + announcements panel: on the page gutter, centred between the menu button and the
+   bottom. Its width is capped by the screen height, so the 4:3 photo plus the text always fit. */
+.hero__side { display: contents; }
 .hero__board {
-  position: absolute; top: 80px; right: var(--gutter); z-index: 2; width: var(--panel); max-height: calc(100% - 80px - var(--gutter));
+  position: absolute; top: 80px; right: var(--gutter); bottom: var(--gutter); z-index: 2; width: var(--panel);
+  height: fit-content; max-height: calc(100% - 80px - var(--gutter)); margin-block: auto;
   display: flex; flex-direction: column; overflow: hidden;
   background: var(--navy-950); border: 1px solid var(--faint); border-radius: 20px;
   box-shadow: 0 30px 70px -40px rgba(0, 0, 0, .8);
@@ -305,6 +307,7 @@
   .heads__strip { height: auto; margin-bottom: 0; margin-top: 0; display: flex; gap: 9.6px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 0 9.6px; scrollbar-width: none; }
   .heads__strip::-webkit-scrollbar { display: none; }
   .head { flex: 0 0 min(44vw, 240px); width: auto; scroll-snap-align: start; }
+  .head__btn { height: auto; }   /* at full height it pushed the name out of the strip */
   .head .media { height: auto; aspect-ratio: 3 / 4; }
   .head .media > img, .head .media > .ph { filter: none; transform: none; }
   .head .media::after { display: none; }
@@ -338,9 +341,15 @@
   .hero, .reduce .hero { height: auto; }
   .hero__stage { position: relative; height: auto; display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 104px var(--gutter) var(--gutter); }
   .hero__title { font-size: 10vw; }
-  .hero__board { position: relative; top: auto; right: auto; width: 100%; max-height: none; }
+  .hero__board { position: relative; top: auto; right: auto; bottom: auto; width: 100%; height: auto; max-height: none; margin-block: 0; }
   .hero__desc { display: block; }
   .hero__scroll { display: none; }
+}
+/* tablets and zoomed-in browsers: the panel gets a screen of its own, centred, and sized to fit it */
+@media (min-width: 600px) and (max-width: 900px) {
+  .hero__stage { gap: 0; padding-bottom: 0; }
+  .hero__side { display: grid; place-items: center; width: 100%; min-height: calc(100svh - 80px); padding-block: 24px; }
+  .hero__board { width: min(100%, (100svh - 128px - 200px) * 4 / 3); }
 }
 
 /* ---------- 05 FIND YOUR LOST ITEMS ---------- */

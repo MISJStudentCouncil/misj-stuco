@@ -1,0 +1,55 @@
+/* ==========================================================================
+   MISJ STUCO — EVENTS + CONTACT PAGES
+   The page shell (background, sparkles, heading, footer) comes from lost-found.css
+   ========================================================================== */
+
+[data-page="events"] .lf-title { font-size: clamp(2.6rem, 6.4vw, 8.4rem); }
+.lf-bar__note a:hover b { color: var(--yellow); }
+
+/* ---------- events: the same 4:3 photo frame as the homepage panel ---------- */
+.ev-grid { display: grid; gap: clamp(16px, 2vw, 28px); }
+.ev-card {
+  display: flex; flex-direction: column; overflow: hidden;
+  border: 1px solid var(--faint); border-radius: 20px; background: var(--navy-950);
+  box-shadow: 0 30px 70px -40px rgba(0, 0, 0, .8);
+  animation: lfIn 1s var(--ease) both;
+}
+.ev-card:nth-child(2) { animation-delay: .08s; }
+.ev-card:nth-child(n+3) { animation-delay: .16s; }
+.ev-card__img { flex: none; aspect-ratio: 4 / 3; overflow: hidden; background: var(--navy-800); }
+.ev-card__img img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.ev-card:hover .ev-card__img img { transform: scale(1.04); }
+.ev-card__body { display: grid; align-content: start; gap: .6rem; padding: clamp(18px, 2vw, 28px); }
+.ev-card__when { color: var(--yellow); }
+.ev-card__title { font-family: var(--f-display); font-weight: 700; letter-spacing: -.02em; line-height: 1.05; font-size: clamp(1.3rem, 1.7vw, 1.9rem); }
+.ev-card__desc { color: var(--mist); line-height: 1.55; }
+/* wide screens: every event is a full-width row, photo on the left */
+@media (min-width: 900px) {
+  .ev-card { flex-direction: row; }
+  .ev-card__img { width: 58%; }
+  .ev-card__body { flex: 1; align-content: center; padding: clamp(28px, 3.4vw, 56px); }
+  .ev-card__title { font-size: clamp(1.8rem, 3vw, 3.4rem); }
+  .ev-card__desc { font-size: clamp(1rem, 1.1vw, 1.2rem); }
+}
+
+/* ---------- contact ---------- */
+.ct-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: clamp(16px, 2vw, 28px); }
+.ct-card {
+  height: 100%; display: flex; flex-direction: column; align-items: flex-start; gap: .8rem;
+  padding: clamp(24px, 3vw, 40px); border: 1px solid var(--faint); border-radius: 24px;
+  background: linear-gradient(160deg, rgba(26, 71, 214, .22), rgba(5, 15, 51, .55) 60%);
+  transition: border-color .35s, transform .5s var(--ease);
+  animation: lfIn 1s var(--ease) both;
+}
+.ct-grid li:nth-child(2) .ct-card { animation-delay: .08s; }
+.ct-grid li:nth-child(n+3) .ct-card { animation-delay: .16s; }
+.ct-card:hover, .ct-card:focus-visible { border-color: var(--yellow); transform: translateY(-4px); }
+.ct-card__icon {
+  display: grid; place-items: center; width: 64px; height: 64px; margin-bottom: .6rem; border-radius: 50%;
+  border: 1px solid var(--faint); transition: background .35s, color .35s, border-color .35s;
+}
+.ct-card:hover .ct-card__icon { background: var(--yellow); border-color: var(--yellow); color: var(--navy-950); }
+.ct-card__icon svg { width: 28px; height: 28px; fill: currentColor; }
+.ct-card__label { color: var(--mist); }
+.ct-card__value { font-family: var(--f-display); font-weight: 700; letter-spacing: -.02em; line-height: 1.15; font-size: clamp(1.3rem, 1.8vw, 2rem); overflow-wrap: anywhere; }
+.ct-card__action { margin-top: auto; padding-top: .8rem; color: var(--yellow); font-weight: 600; }
