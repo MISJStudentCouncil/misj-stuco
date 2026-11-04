@@ -85,3 +85,7 @@ drop policy if exists "hero photos: admins remove" on storage.objects;
 create policy "hero photos: admins remove" on storage.objects
   for delete to authenticated
   using (bucket_id = 'announcements' and public.lf_is_librarian());
+
+-- 4. Make the new table available straight away --------------------------------
+
+notify pgrst, 'reload schema';

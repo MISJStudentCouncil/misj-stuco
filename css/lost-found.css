@@ -190,6 +190,25 @@
 .an-form .lf-input { display: block; width: 100%; }
 .an-form .lf-input::placeholder, .an-form textarea::placeholder { color: rgba(255, 255, 255, .35); }
 .an-cancel { margin-top: .7rem; width: 100%; justify-content: center; }
+/* crop: the frame is the homepage slide's 4:3 shape */
+.an-crop {
+  position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 18px; background: var(--navy-800);
+  border: 1.5px solid rgba(255, 210, 31, .55); cursor: grab; touch-action: none; user-select: none;
+}
+.an-crop:active { cursor: grabbing; }
+.an-crop:focus-visible, .an-photo.is-over .an-crop { outline: none; border-color: var(--yellow); box-shadow: 0 0 0 4px rgba(255, 210, 31, .15); }
+.an-crop__img { position: absolute; left: 0; top: 0; max-width: none; transform-origin: 0 0; pointer-events: none; }
+/* rule-of-thirds guides */
+.an-crop::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .35;
+  background: linear-gradient(90deg, transparent calc(33.33% - .5px), #fff calc(33.33% - .5px) calc(33.33% + .5px), transparent calc(33.33% + .5px) calc(66.67% - .5px), #fff calc(66.67% - .5px) calc(66.67% + .5px), transparent calc(66.67% + .5px)),
+              linear-gradient(transparent calc(33.33% - .5px), #fff calc(33.33% - .5px) calc(33.33% + .5px), transparent calc(33.33% + .5px) calc(66.67% - .5px), #fff calc(66.67% - .5px) calc(66.67% + .5px), transparent calc(66.67% + .5px));
+}
+.an-crop__bar { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
+.an-crop__bar label { color: var(--mist); }
+.an-crop__bar input { flex: 1; min-width: 0; accent-color: var(--yellow); }
+.an-photo:not(.has-photo) .an-crop, .an-photo:not(.has-photo) .an-crop__bar, .an-photo.has-photo .lf-drop { display: none; }
+.an-photo.is-over .lf-drop { border-color: var(--yellow); background: rgba(255, 210, 31, .06); }
 .an-history { margin-top: clamp(36px, 6vh, 64px); }
 .an-row__title { font-family: var(--f-display); font-weight: 700; font-size: 1.15rem; line-height: 1.2; }
 .an-row__desc { color: var(--mist); display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }

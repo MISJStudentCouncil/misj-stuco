@@ -101,28 +101,30 @@
     void board.offsetWidth;   // lay the hidden letters out first, so the reveal below animates
     board.classList.add('is-ready');
   }
-  /* arrows, dots, swipe and autoplay. Stops while someone is hovering or tabbing through it. */
+  /* arrows, dots, the right half of the slide, swipe and autoplay. Autoplay keeps going under the
+     mouse, starts its count again after every change, and stops while someone tabs through it. */
   function initSlides(board, n) {
     if (n < 2) return;
     const slides = $$('.hero__slide', board), [prev, next] = $$('.hero__step', board), pips = $('.hero__pips', board);
     let cur = 0, timer, touchX = null;
     $('.hero__nav', board).hidden = false;
+    $('.hero__slides', board).insertAdjacentHTML('beforeend', '<button class="hero__hit" type="button" tabindex="-1" aria-hidden="true" data-cursor="button"></button>');
     pips.innerHTML = slides.map((s, i) => `<button class="hero__pip" type="button" aria-label="Go to announcement ${i + 1}" aria-current="${!i}" data-cursor="button"></button>`).join('');
     const dots = $$('.hero__pip', pips);
-    const go = (i) => {
+    const stop = () => clearInterval(timer);
+    const play = () => { stop(); if (!SC.reduce) timer = setInterval(() => show(cur + 1), SLIDE_MS); };
+    const show = (i) => {
       cur = (i + n) % n;
       slides.forEach((s, k) => s.classList.toggle('is-on', k === cur));
       dots.forEach((d, k) => d.setAttribute('aria-current', String(k === cur)));
     };
-    const stop = () => clearInterval(timer);
-    const play = () => { stop(); if (!SC.reduce) timer = setInterval(() => go(cur + 1), SLIDE_MS); };
+    const go = (i) => { show(i); if (!board.contains(document.activeElement) || !document.activeElement.matches(':focus-visible')) play(); };
     prev.addEventListener('click', () => go(cur - 1));
     next.addEventListener('click', () => go(cur + 1));
+    $('.hero__hit', board).addEventListener('click', () => go(cur + 1));
     dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
-    board.addEventListener('pointerenter', stop);
-    board.addEventListener('pointerleave', play);
-    board.addEventListener('focusin', stop);
-    board.addEventListener('focusout', play);
+    board.addEventListener('focusin', (e) => { if (e.target.matches(':focus-visible')) stop(); });
+    board.addEventListener('focusout', (e) => { if (!board.contains(e.relatedTarget)) play(); });
     board.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
     board.addEventListener('touchend', (e) => {
       const dx = e.changedTouches[0].clientX - touchX;

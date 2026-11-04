@@ -7,7 +7,7 @@
 
 /* ---------- 00 ARRIVAL ---------- */
 .hero { height: 165vh; }
-.hero__stage { --panel: clamp(320px, 31vw, 600px); display: grid; place-items: center; padding-right: calc(var(--panel) + var(--gutter)); }
+.hero__stage { --panel: min(clamp(360px, 38vw, 720px), (100vh - 80px - var(--gutter) - 200px) * 4 / 3); display: grid; place-items: center; padding-right: calc(var(--panel) + var(--gutter)); }
 .hero__grid {
   position: absolute; inset: 0; pointer-events: none;
   background-image: linear-gradient(90deg, rgba(255, 255, 255, .045) 1px, transparent 1px);
@@ -71,9 +71,10 @@
 .hero__lf-icon { display: grid; place-items: center; width: 2em; height: 2em; border-radius: 50%; background: var(--navy-950); color: var(--yellow); font-weight: 800; font-family: var(--f-display); }
 @keyframes lfPulse { 0% { box-shadow: 0 0 0 0 rgba(255, 210, 31, .5), 0 18px 50px -14px var(--yellow-glow); } 70%, 100% { box-shadow: 0 0 0 18px rgba(255, 210, 31, 0), 0 18px 50px -14px var(--yellow-glow); } }
 .reduce .hero__lf { animation: none; }
-/* events + announcements panel: on the page gutter, starting below the menu button */
+/* events + announcements panel: on the page gutter, starting below the menu button. Its width
+   is capped by the screen height, so the 4:3 photo plus the text always fit above the gutter. */
 .hero__board {
-  position: absolute; top: 80px; right: var(--gutter); bottom: var(--gutter); z-index: 2; width: var(--panel);
+  position: absolute; top: 80px; right: var(--gutter); z-index: 2; width: var(--panel); max-height: calc(100% - 80px - var(--gutter));
   display: flex; flex-direction: column; overflow: hidden;
   background: var(--navy-950); border: 1px solid var(--faint); border-radius: 20px;
   box-shadow: 0 30px 70px -40px rgba(0, 0, 0, .8);
@@ -83,7 +84,7 @@
 .loaded .hero__board.is-ready { opacity: 1; }
 .arrived .hero__board { transition: none; }
 /* slides sit on top of each other in one grid cell, so the panel never changes size */
-.hero__slides { flex: 1 1 0; min-height: 0; display: grid; grid-template-rows: minmax(0, 1fr); }
+.hero__slides { position: relative; flex: 0 1 auto; min-height: 0; display: grid; }
 .hero__slide {
   position: relative; grid-area: 1 / 1; min-width: 0; min-height: 0; display: flex; flex-direction: column;
   opacity: 0; visibility: hidden; transition: opacity .6s var(--ease), visibility .6s;
@@ -92,24 +93,33 @@
 /* signed-in admins only */
 .hero__edit { position: absolute; left: 12px; top: 12px; z-index: 2; padding: .6em 1.1em; border-radius: 999px; background: var(--navy-950); border: 1px solid var(--yellow); color: var(--yellow); transition: background .3s, color .3s; }
 .hero__edit:hover, .hero__edit:focus-visible { background: var(--yellow); color: var(--navy-950); }
-.hero__media { flex: 1 1 0; min-height: 0; }
-.hero__copy { flex: none; padding: clamp(16px, 3vh, 32px) clamp(20px, 2.4vw, 40px) clamp(8px, 1.4vh, 14px); }
-.hero__label { margin-bottom: clamp(8px, 1.4vh, 14px); }
-.hero__sub { font-family: var(--f-display); font-weight: 700; letter-spacing: -.02em; line-height: 1.05; font-size: clamp(1.4rem, 1.9vw, 2.4rem); transform-origin: left top; transform: scale(var(--sub-scale, 1)); opacity: var(--sub-op, 1); }
+/* always 4:3, the same frame admins crop to at /announcementadmins */
+.hero__media { flex: 0 1 auto; min-height: 0; aspect-ratio: 4 / 3; }
+/* the right half of a slide is a big "next" button */
+.hero__hit { position: absolute; top: 0; right: 0; bottom: 0; z-index: 1; width: 50%; }
+.hero__hit::after {
+  content: "92"; position: absolute; right: 16px; top: 33%; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%;
+  background: rgba(3, 10, 34, .6); border: 1px solid var(--yellow); color: var(--yellow); font-size: 1.3rem;
+  opacity: 0; transform: translateX(-8px); transition: opacity .3s, transform .3s var(--ease);
+}
+.hero__hit:hover::after { opacity: 1; transform: none; }
+.hero__copy { flex: none; padding: clamp(12px, 2vh, 22px) clamp(16px, 1.8vw, 28px) clamp(6px, 1vh, 10px); }
+.hero__label { margin-bottom: clamp(6px, 1vh, 10px); font-size: .62rem; }
+.hero__sub { font-family: var(--f-display); font-weight: 700; letter-spacing: -.02em; line-height: 1.05; font-size: clamp(1.05rem, 1.25vw, 1.55rem); transform-origin: left top; transform: scale(var(--sub-scale, 1)); opacity: var(--sub-op, 1); }
 .hero__desc {
-  margin-top: clamp(8px, 1.4vh, 14px); color: var(--mist); font-size: clamp(1rem, 1.05vw, 1.2rem); line-height: 1.45;
-  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 5; overflow: hidden;
+  margin-top: clamp(4px, .8vh, 8px); color: var(--mist); font-size: clamp(.8rem, .78vw, .92rem); line-height: 1.45;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden;
   transform: translate3d(0, var(--desc-y, 0), 0);
 }
-.hero__foot { flex: none; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 16px; padding: 0 clamp(20px, 2.4vw, 40px) clamp(14px, 2.6vh, 28px); }
-.hero__contact { color: var(--mist); font-size: clamp(1rem, 1.05vw, 1.2rem); line-height: 1.45; }
+.hero__foot { flex: none; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 16px; padding: 0 clamp(16px, 1.8vw, 28px) clamp(10px, 1.8vh, 18px); }
+.hero__contact { color: var(--mist); font-size: clamp(.78rem, .74vw, .88rem); line-height: 1.45; }
 .hero__contact a { color: var(--yellow); font-weight: 600; }
 .hero__contact a:hover, .hero__contact a:focus-visible { text-decoration: underline; }
 .hero__nav { display: flex; align-items: center; gap: 6px; }
-.hero__step { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--faint); transition: border-color .3s, color .3s; }
+.hero__step { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--faint); font-size: 1.15rem; transition: border-color .3s, color .3s; }
 .hero__step:hover, .hero__step:focus-visible { border-color: var(--yellow); color: var(--yellow); }
 .hero__pips { display: flex; flex-wrap: wrap; justify-content: center; }
-.hero__pip { width: 20px; height: 20px; padding: 6px; border-radius: 50%; background: var(--faint); background-clip: content-box; transition: background-color .3s; }
+.hero__pip { width: 26px; height: 26px; padding: 8px; border-radius: 50%; background: var(--faint); background-clip: content-box; transition: background-color .3s; }
 .hero__pip:hover { background-color: var(--mist); }
 .hero__pip[aria-current="true"] { background-color: var(--yellow); }
 /* same fade as the school line */
@@ -321,16 +331,14 @@
 /* short screens: no room for the scroll cue, the Explore button does the same job */
 @media (max-height: 760px) {
   .hero__scroll { display: none; }
-  .hero__desc { -webkit-line-clamp: 3; }   /* keeps the slide's photo from being squeezed away */
+  .hero__desc { -webkit-line-clamp: 2; }   /* keeps the slide's photo from being squeezed away */
 }
 /* ---------- hero on mobile: the panel stacks below, so the hero is not pinned ---------- */
 @media (max-width: 900px) {
   .hero, .reduce .hero { height: auto; }
   .hero__stage { position: relative; height: auto; display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 104px var(--gutter) var(--gutter); }
   .hero__title { font-size: 10vw; }
-  .hero__board { position: relative; top: auto; right: auto; bottom: auto; width: 100%; }
-  .hero__slides { flex: none; grid-template-rows: auto; }
-  .hero__media { flex: none; aspect-ratio: 4 / 3; }
+  .hero__board { position: relative; top: auto; right: auto; width: 100%; max-height: none; }
   .hero__desc { display: block; }
   .hero__scroll { display: none; }
 }
